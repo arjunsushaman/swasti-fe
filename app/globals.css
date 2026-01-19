@@ -15,7 +15,8 @@
     @apply font-semibold tracking-tight;
   }
 
-  a {
+  /* Remove global transition that conflicts with Framer Motion */
+  a:not([class*="transition-"]) {
     @apply transition-colors duration-200;
   }
 }
@@ -127,5 +128,38 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* CRITICAL: Disable infinite animations */
+  .animate-blob,
+  .animate-pulse,
+  .animate-ping,
+  .animate-spin,
+  .animate-bounce {
+    animation: none !important;
+  }
+
+  /* Remove blur for performance */
+  .blur-3xl,
+  .blur-2xl,
+  .blur-xl {
+    filter: none !important;
+  }
+}
+
+/* Mobile and tablet optimizations for performance */
+@media (max-width: 1023px) {
+  /* Reduce blur on mobile/tablet for performance */
+  .blur-3xl {
+    filter: blur(20px) !important; /* blur-xl equivalent */
+  }
+
+  .blur-2xl {
+    filter: blur(16px) !important; /* blur-lg equivalent */
+  }
+
+  /* Faster transitions on mobile */
+  .transition-all {
+    transition-duration: 300ms !important;
   }
 }

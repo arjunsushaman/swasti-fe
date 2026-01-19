@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { VALUE_BOXES } from '@/lib/constants';
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { hoverLift } from '@/lib/animations';
+import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
 
 interface BoxProps {
   icon: string;
@@ -20,18 +21,19 @@ const gradients = [
 ];
 
 function Box({ icon, title, description, index }: BoxProps) {
+  const { prefersReducedMotion } = useMotionPreferences();
   const gradientClass = gradients[index % gradients.length];
 
   return (
     <motion.div
-      whileHover={hoverLift}
+      whileHover={prefersReducedMotion ? undefined : hoverLift}
       className="glass-card p-8 rounded-2xl h-full border border-white/60 bg-white/40 hover:bg-white/80 transition-all duration-300"
     >
       <motion.div
         className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${gradientClass} flex items-center justify-center text-3xl mb-6 shadow-sm`}
         role="img"
         aria-label={title}
-        whileHover={{ scale: 1.1, rotate: 5 }}
+        whileHover={prefersReducedMotion ? undefined : { scale: 1.1, rotate: 5 }}
         transition={{ duration: 0.2 }}
       >
         {icon}

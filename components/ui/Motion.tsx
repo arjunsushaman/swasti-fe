@@ -10,6 +10,7 @@ import {
   defaultTransition,
   hoverLift,
 } from '@/lib/animations';
+import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
 
 interface MotionDivProps extends HTMLMotionProps<'div'> {
   children: ReactNode;
@@ -35,13 +36,24 @@ interface AnimatedSectionProps {
 }
 
 export function AnimatedSection({ children, className = '', delay = 0 }: AnimatedSectionProps) {
+  const { prefersReducedMotion, isMobile } = useMotionPreferences();
+
+  if (prefersReducedMotion) {
+    return <section className={className}>{children}</section>;
+  }
+
+  const transition = {
+    ...(isMobile ? { duration: 0.3 } : defaultTransition),
+    delay,
+  };
+
   return (
     <motion.section
       initial="initial"
       whileInView="animate"
       viewport={{ once: true, margin: '-50px' }}
       variants={fadeInUp}
-      transition={{ ...defaultTransition, delay }}
+      transition={transition}
       className={className}
     >
       {children}

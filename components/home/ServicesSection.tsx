@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { hoverLift } from '@/lib/animations';
+import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
 
 interface ServiceDetail {
   id: string;
@@ -116,6 +117,7 @@ const getIcon = (code: string) => {
 };
 
 export default function ServicesSection() {
+  const { prefersReducedMotion, isMobile } = useMotionPreferences();
   const [columns, setColumns] = useState(1);
   const [expandedRow, setExpandedRow] = useState<number | null>(null);
 
@@ -146,16 +148,17 @@ export default function ServicesSection() {
 
       {/* Decorative Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-primary-50 to-transparent opacity-60 rounded-bl-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-accent-50 to-transparent opacity-60 rounded-tr-full blur-3xl" />
+        <div className={`absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-radial from-primary-50 to-transparent opacity-60 rounded-bl-full ${isMobile ? 'blur-lg' : 'blur-2xl'}`} />
+        <div className={`absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-radial from-accent-50 to-transparent opacity-60 rounded-tr-full ${isMobile ? 'blur-lg' : 'blur-2xl'}`} />
       </div>
 
       <div className="container-custom relative z-10">
         <div className="text-center mb-16 max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.9 }}
+            whileInView={prefersReducedMotion ? false : { opacity: 1, scale: 1 }}
             viewport={{ once: true }}
+            transition={prefersReducedMotion ? { duration: 0 } : undefined}
             className="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wider text-primary-700 bg-primary-100/80 rounded-full border border-primary-200 uppercase"
           >
             🩺 Our Services
@@ -176,7 +179,7 @@ export default function ServicesSection() {
             return (
               <StaggerItem key={service.id} className="h-full">
                 <motion.div
-                  layout // Enables smooth layout transitions for siblings
+                  layout={!isMobile} // Disable smooth layout transitions on mobile for performance
                   onClick={() => handleCardClick(index)}
                   className={`group relative bg-white rounded-3xl border shadow-sm transition-all duration-300 flex flex-col overflow-hidden cursor-pointer ${isExpanded
                       ? 'border-primary-300 shadow-xl ring-1 ring-primary-100'

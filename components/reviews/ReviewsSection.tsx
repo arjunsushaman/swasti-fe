@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import ReviewCard from './ReviewCard';
 import { AnimatedSection, AnimatedDiv, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { hoverLift } from '@/lib/animations';
+import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
 
 interface Review {
   id: number;
@@ -51,6 +52,7 @@ const PLACEHOLDER_REVIEWS: Review[] = [
 ];
 
 export default function ReviewsSection() {
+  const { prefersReducedMotion, isMobile } = useMotionPreferences();
   const [reviews, setReviews] = useState<Review[]>(PLACEHOLDER_REVIEWS);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -86,8 +88,8 @@ export default function ReviewsSection() {
     <AnimatedSection className="py-24 bg-white relative overflow-hidden">
       {/* Decorative Background Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[20%] right-[-5%] w-[500px] h-[500px] bg-primary-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-50" />
-        <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-accent-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-50" />
+        <div className={`absolute top-[20%] right-[-5%] w-[500px] h-[500px] bg-primary-100/50 rounded-full mix-blend-multiply filter ${isMobile ? 'blur-lg' : 'blur-2xl'} opacity-50`} />
+        <div className={`absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-accent-100/50 rounded-full mix-blend-multiply filter ${isMobile ? 'blur-lg' : 'blur-2xl'} opacity-50`} />
       </div>
 
       <div className="container-custom relative z-10">
@@ -130,7 +132,7 @@ export default function ReviewsSection() {
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="card animate-pulse">
+              <div key={i} className={`card ${!prefersReducedMotion ? 'animate-pulse' : ''}`}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 bg-secondary-200 rounded-full" />
                   <div className="flex-1">

@@ -9,9 +9,18 @@ export function useScrollListener(threshold: number = 50) {
     // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    // Use ref to track RAF ID for throttling
+    let rafId: number | null = null;
+
     const handleScroll = () => {
-      const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      setIsScrolled(scrollTop > threshold);
+      // Skip if RAF already scheduled (throttling)
+      if (rafId) return;
+
+      rafId = requestAnimationFrame(() => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        setIsScrolled(scrollTop > threshold);
+        rafId = null;
+      });
     };
 
     // Set initial state
@@ -19,7 +28,13 @@ export function useScrollListener(threshold: number = 50) {
 
     if (!prefersReducedMotion) {
       window.addEventListener('scroll', handleScroll, { passive: true });
-      return () => window.removeEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+        // Cancel any pending RAF
+        if (rafId) {
+          cancelAnimationFrame(rafId);
+        }
+      };
     }
   }, [threshold]);
 

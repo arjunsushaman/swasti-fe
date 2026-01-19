@@ -4,18 +4,30 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { MAIN_LINE, SUB_LINE, CONTACT_INFO } from '@/lib/constants';
 import { fadeInUp, fadeIn, staggerContainer, staggerItem, defaultTransition } from '@/lib/animations';
+import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
 
 export default function Hero() {
+  const { prefersReducedMotion, isMobile, shouldDisableInfiniteAnimations } = useMotionPreferences();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary-50 pt-20">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-white via-primary-50 to-primary-100 opacity-80" />
 
-        {/* Animated Blobs */}
-        <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" />
-        <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-accent-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animate-delay-2000" />
-        <div className="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animate-delay-4000" />
+        {/* Conditional animated blobs - only on desktop with motion enabled */}
+        {!shouldDisableInfiniteAnimations && (
+          <>
+            <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob" />
+            <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-accent-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animate-delay-2000" />
+            <div className="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animate-delay-4000" />
+          </>
+        )}
+
+        {/* Static fallback for mobile/reduced motion */}
+        {shouldDisableInfiniteAnimations && (
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-100 via-primary-50 to-accent-50 opacity-50" />
+        )}
 
         {/* Grid Pattern Overlay */}
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]" />
@@ -25,21 +37,21 @@ export default function Hero() {
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
+            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+            animate={prefersReducedMotion ? false : { opacity: 1, y: 0 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-white/60 shadow-sm mb-8"
           >
-            <span className="flex h-2 w-2 rounded-full bg-accent-500 animate-pulse"></span>
+            <span className={`flex h-2 w-2 rounded-full bg-accent-500 ${!prefersReducedMotion ? 'animate-pulse' : ''}`}></span>
             <span className="text-sm font-medium text-secondary-600">Your Health, Our Priority</span>
           </motion.div>
 
           {/* Main Tagline */}
           <motion.h1
-            initial="initial"
-            animate="animate"
+            initial={prefersReducedMotion ? false : "initial"}
+            animate={prefersReducedMotion ? false : "animate"}
             variants={fadeInUp}
-            transition={defaultTransition}
+            transition={prefersReducedMotion ? { duration: 0 } : defaultTransition}
             className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-secondary-900 mb-8 text-balance"
           >
             <span className="block mb-2">Clarity. Compassion.</span>
@@ -48,10 +60,10 @@ export default function Hero() {
 
           {/* Sub Line */}
           <motion.p
-            initial="initial"
-            animate="animate"
+            initial={prefersReducedMotion ? false : "initial"}
+            animate={prefersReducedMotion ? false : "animate"}
             variants={fadeInUp}
-            transition={{ ...defaultTransition, delay: 0.2 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.2 }}
             className="text-xl text-secondary-600 mb-10 leading-relaxed max-w-3xl mx-auto"
           >
             {SUB_LINE}
@@ -59,25 +71,36 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <motion.div
-            initial="initial"
-            animate="animate"
+            initial={prefersReducedMotion ? false : "initial"}
+            animate={prefersReducedMotion ? false : "animate"}
             variants={staggerContainer}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <motion.div variants={staggerItem} transition={{ ...defaultTransition, delay: 0.3 }}>
+            <motion.div
+              variants={staggerItem}
+              transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.3 }}
+            >
               <Link
                 href="/booking"
                 className="btn-primary flex items-center gap-3 px-8 py-4 text-lg shadow-lg shadow-primary-500/30 hover:shadow-primary-600/40 hover:-translate-y-1 transition-all duration-300"
               >
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                {!prefersReducedMotion && (
+                  <span className="relative flex h-3 w-3">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                  </span>
+                )}
+                {prefersReducedMotion && (
                   <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                </span>
+                )}
                 Book Appointment
               </Link>
             </motion.div>
 
-            <motion.div variants={staggerItem} transition={{ ...defaultTransition, delay: 0.4 }}>
+            <motion.div
+              variants={staggerItem}
+              transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.4 }}
+            >
               <a
                 href={CONTACT_INFO.whatsappLink}
                 target="_blank"
@@ -94,10 +117,10 @@ export default function Hero() {
 
           {/* Contact info */}
           <motion.div
-            initial="initial"
-            animate="animate"
+            initial={prefersReducedMotion ? false : "initial"}
+            animate={prefersReducedMotion ? false : "animate"}
             variants={fadeIn}
-            transition={{ ...defaultTransition, delay: 0.6 }}
+            transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.6 }}
             className="mt-12 flex flex-wrap justify-center gap-8 text-secondary-500 font-medium"
           >
             <a

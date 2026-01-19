@@ -64,3 +64,25 @@ export const hoverScale = {
 export const tapScale = {
   scale: 0.98,
 };
+
+export function getAnimationProps(
+  variant: Variants,
+  options: { reducedMotion?: boolean; isMobile?: boolean }
+) {
+  if (options.reducedMotion) {
+    return {
+      initial: false,
+      animate: false,
+      transition: { duration: 0 },
+    };
+  }
+
+  const duration = options.isMobile ? 0.3 : 0.5;
+
+  return {
+    initial: 'initial',
+    animate: 'animate',
+    variants: variant,
+    transition: { ...defaultTransition, duration },
+  };
+}

@@ -7,17 +7,21 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import Navigation from './Navigation';
 import { useScrollListener } from '@/lib/hooks/useScrollListener';
+import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const isScrolled = useScrollListener(50);
+  const { prefersReducedMotion, isMobile } = useMotionPreferences();
+  const threshold = isMobile ? 30 : 50;
+  const isScrolled = useScrollListener(threshold);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
 
   return (
     <header
       className={`
-        fixed top-0 w-full z-50 transition-all duration-500 ease-in-out
+        fixed top-0 w-full z-50 transition-all ease-in-out
+        ${prefersReducedMotion ? 'duration-100' : (isMobile ? 'duration-300' : 'duration-500')}
         ${isHomePage && !isScrolled
           ? 'bg-transparent shadow-none'
           : 'bg-white/95 backdrop-blur-md shadow-lg border-b border-primary-100/20'
@@ -44,7 +48,24 @@ export default function Header() {
 
           {/* CTA Button - Desktop */}
           <div className="hidden md:block">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            {!prefersReducedMotion ? (
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link
+                  href="/booking"
+                  className={`inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-xl group
+                    ${isHomePage && !isScrolled
+                      ? 'bg-primary-600 text-white hover:bg-primary-700 border-2 border-primary-600'
+                      : 'bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800'
+                    }
+                  `}
+                >
+                  <svg className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Book Appointment
+                </Link>
+              </motion.div>
+            ) : (
               <Link
                 href="/booking"
                 className={`inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-xl group
@@ -59,12 +80,12 @@ export default function Header() {
                 </svg>
                 Book Appointment
               </Link>
-            </motion.div>
+            )}
           </div>
 
           {/* Mobile menu button */}
           <motion.button
-            whileTap={{ scale: 0.9 }}
+            whileTap={prefersReducedMotion ? undefined : { scale: 0.9 }}
             className={`md:hidden p-2 rounded-lg transition-all duration-300 ${
               isHomePage && !isScrolled
                 ? 'text-secondary-900 hover:bg-secondary-900/5'

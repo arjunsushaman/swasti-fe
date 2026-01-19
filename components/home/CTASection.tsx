@@ -4,17 +4,30 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { AnimatedSection } from '@/components/ui/Motion';
 import { CONTACT_INFO } from '@/lib/constants';
+import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
 
 export default function CTASection() {
+  const { prefersReducedMotion } = useMotionPreferences();
+
   return (
     <AnimatedSection className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-primary-900">
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10 mix-blend-overlay"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 opacity-90"></div>
 
-        {/* Animated Background blobs for CTA */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500 rounded-full mix-blend-overlay filter blur-[100px] opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-500 rounded-full mix-blend-overlay filter blur-[100px] opacity-20 animate-pulse delay-1000"></div>
+        {/* Animated Background blobs for CTA - conditionally animated */}
+        {!prefersReducedMotion && (
+          <>
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500 rounded-full mix-blend-overlay filter blur-[100px] opacity-20 animate-pulse"></div>
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-500 rounded-full mix-blend-overlay filter blur-[100px] opacity-20 animate-pulse delay-1000"></div>
+          </>
+        )}
+        {prefersReducedMotion && (
+          <>
+            <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary-500 rounded-full mix-blend-overlay filter blur-[100px] opacity-20"></div>
+            <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent-500 rounded-full mix-blend-overlay filter blur-[100px] opacity-20"></div>
+          </>
+        )}
       </div>
 
       <div className="container-custom relative z-10">
@@ -24,7 +37,10 @@ export default function CTASection() {
             Book an appointment today and discover healthcare that&apos;s intentional, whole, and built on trust.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              whileHover={prefersReducedMotion ? undefined : { scale: 1.05 }}
+              whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
+            >
               <Link
                 href="/booking"
                 className="inline-flex items-center justify-center rounded-lg bg-white px-8 py-4 text-lg font-bold text-primary-700 shadow-xl transition-all duration-200 hover:bg-gray-50 hover:shadow-2xl hover:shadow-white/10"
@@ -32,7 +48,10 @@ export default function CTASection() {
                 Book Appointment
               </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <motion.div
+              whileHover={prefersReducedMotion ? undefined : { scale: 1.05 }}
+              whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
+            >
               <a
                 href={CONTACT_INFO.whatsappLink}
                 target="_blank"
