@@ -150,12 +150,17 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-  // Try to get slugs from Strapi first
-  const strapiSlugs = await getBlogSlugs();
+  try {
+    // Try to get slugs from Strapi first
+    const strapiSlugs = await getBlogSlugs();
 
-  // If Strapi has slugs, use them; otherwise fall back to dummy data
-  if (strapiSlugs.length > 0) {
-    return strapiSlugs.map((slug) => ({ slug }));
+    // If Strapi has slugs, use them; otherwise fall back to dummy data
+    if (strapiSlugs.length > 0) {
+      return strapiSlugs.map((slug) => ({ slug }));
+    }
+  } catch (error) {
+    // If Strapi is not available (e.g., during build), use fallback data
+    console.log('Strapi not available during build, using fallback blog slugs');
   }
 
   // Fallback to dummy data slugs

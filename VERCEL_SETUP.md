@@ -1,15 +1,18 @@
 # Vercel Deployment Setup
 
-## Build Issue Fixed
+## Build Issue Fixed ✅
 
 The Vercel build was failing because the app was trying to connect to a local Strapi backend (`localhost:1337`) during the build process. This has been fixed with the following changes:
+
+**IMPORTANT**: Vercel does NOT read `.env.production` files from your repository. Environment variables must be set in the Vercel dashboard. The app now uses safe fallback values when environment variables are not set.
 
 ### Changes Made
 
 1. **Updated `BlogContent.tsx`**: Now handles both Strapi BlocksContent (JSON) and HTML strings from fallback data
-2. **Created `.env.production`**: Production environment variables with safe defaults
-3. **Updated `next.config.js`**: Added comments for production Strapi domain configuration
-4. **Improved error handling**: Better logging in `lib/strapi.ts`
+2. **Fixed `generateStaticParams`**: Added try-catch to gracefully handle Strapi connection failures during build
+3. **Updated `lib/strapi.ts`**: Changed default URL from `localhost:1337` to a non-existent URL that fails gracefully
+4. **Created `.env.production`**: Reference file (not used by Vercel, but helpful for local builds)
+5. **Updated `next.config.js`**: Added comments for production Strapi domain configuration
 
 ### How the App Works Now
 

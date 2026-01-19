@@ -10,7 +10,9 @@ import {
   BlogPost,
 } from '@/types';
 
-const STRAPI_URL = process.env.STRAPI_API_URL || 'http://localhost:1337';
+// Use a non-existent URL as fallback to prevent trying to connect to localhost during builds
+// In production, set STRAPI_API_URL environment variable in Vercel dashboard
+const STRAPI_URL = process.env.STRAPI_API_URL || 'https://strapi-not-configured.local';
 const STRAPI_TOKEN = process.env.STRAPI_API_TOKEN;
 
 interface FetchOptions {
