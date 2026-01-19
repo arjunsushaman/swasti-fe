@@ -12,7 +12,7 @@ export default function IntroSection() {
         <div className="max-w-4xl mx-auto text-center">
           <span className="text-primary-600 font-semibold tracking-wider uppercase text-sm mb-4 block">Welcome to Swasti Lifecare</span>
           <h2 className="text-3xl md:text-5xl font-bold text-secondary-900 mb-8 leading-tight">
-            Healthcare Redefined with <span className="text-gradient">Compassion & Excellence</span>
+            Healthcare Redefined with <br /><span className="text-gradient">Compassion & Excellence</span>
           </h2>
           <p className="text-lg text-secondary-600 leading-relaxed mb-10 text-balance">{INTRO_TEXT}</p>
           <div className="flex flex-wrap justify-center gap-4">

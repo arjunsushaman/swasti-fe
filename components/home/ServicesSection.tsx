@@ -164,9 +164,9 @@ export default function ServicesSection() {
             🩺 Our Services
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold text-secondary-900 mb-6 tracking-tight">
-            Comprehensive Healthcare <span className="text-gradient">Under One Roof</span>
+            Comprehensive Healthcare <br /><span className="text-gradient">Under One Roof</span>
           </h2>
-          <p className="text-xl text-secondary-600 leading-relaxed text-balance">
+          <p className="text-lg text-secondary-600 leading-relaxed text-balance">
             We provide a holistic approach to your health with a wide range of specialized services.
           </p>
         </div>
