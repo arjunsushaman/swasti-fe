@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 
 export function useMotionPreferences() {
+  const [mounted, setMounted] = useState(false);
   const [preferences, setPreferences] = useState({
     prefersReducedMotion: false,
     isMobile: false,
@@ -11,6 +12,8 @@ export function useMotionPreferences() {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
+
+    setMounted(true);
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const width = window.innerWidth;
@@ -48,7 +51,8 @@ export function useMotionPreferences() {
 
   return {
     ...preferences,
-    shouldDisableInfiniteAnimations: preferences.prefersReducedMotion || preferences.isMobile,
-    shouldReduceBlur: preferences.isMobile || preferences.isTablet || preferences.prefersReducedMotion,
+    mounted,
+    shouldDisableInfiniteAnimations: mounted && (preferences.prefersReducedMotion || preferences.isMobile),
+    shouldReduceBlur: mounted && (preferences.isMobile || preferences.isTablet || preferences.prefersReducedMotion),
   };
 }
