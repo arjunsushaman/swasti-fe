@@ -14,7 +14,7 @@ export default function IntroSection() {
           <h2 className="text-3xl md:text-5xl font-bold text-secondary-900 mb-8 leading-tight">
             Healthcare Redefined with <span className="text-gradient">Compassion & Excellence</span>
           </h2>
-          <p className="text-lg md:text-xl text-secondary-600 leading-relaxed mb-10 text-balance">{INTRO_TEXT}</p>
+          <p className="text-lg text-secondary-600 leading-relaxed mb-10 text-balance">{INTRO_TEXT}</p>
           <div className="flex flex-wrap justify-center gap-4">
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Link href="/#services" className="btn-primary shadow-lg shadow-primary-500/20">
