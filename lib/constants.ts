@@ -15,7 +15,7 @@ export const CONTACT_INFO = {
   whatsappLink: 'https://wa.me/918547734214',
   email: 'contact@swastilifescare.com',
   streetAddress: 'Paravur - Parippally Rd, opp. bus stop, Parippally, Kerala 691574',
-  locationLink: 'https://maps.app.goo.gl/your-location-link',
+  locationLink: 'https://www.google.com/maps/search/?api=1&query=Swasti+Lifecare+Paravur+Parippally+Rd+opp+bus+stop+Parippally+Kerala+691574',
   instagramLink: 'https://www.instagram.com/swasti_lifecare',
   facebookLink: 'https://www.facebook.com/p/Swasti-Lifecare-61577658077432/',
   clinicHours: '9:00 AM – 9:00 PM',
