@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { NAV_ITEMS } from '@/lib/constants';
 import { NavItem } from '@/types';
@@ -16,23 +16,45 @@ interface NavigationProps {
 export default function Navigation({ mobile = false, onNavigate, isTransparent = false }: NavigationProps) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleDropdownToggle = (label: string) => {
     setOpenDropdown(openDropdown === label ? null : label);
   };
 
-  const handleLinkClick = (href: string) => {
+  const scrollToSection = (sectionId: string) => {
+    // Small delay to ensure DOM is ready
+    setTimeout(() => {
+      const targetElement = document.getElementById(sectionId);
+      if (targetElement) {
+        const headerOffset = 80; // Account for fixed header
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, href: string) => {
     setOpenDropdown(null);
 
-    // Handle smooth scroll for anchor links
-    if ((href === '/#contact' || href === '/#services') && pathname === '/') {
-      const targetId = href.replace('/#', '');
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
+    // Handle anchor links (/#contact, /#services)
+    if (href.startsWith('/#')) {
+      e.preventDefault(); // Always prevent default for hash links
+      const sectionId = href.replace('/#', '');
+
+      if (pathname === '/') {
+        // Already on homepage, just scroll
+        scrollToSection(sectionId);
+      } else {
+        // Navigate to homepage first, then scroll
+        router.push('/');
+        // Scroll after navigation completes
+        setTimeout(() => scrollToSection(sectionId), 300);
       }
     }
 
@@ -113,13 +135,8 @@ export default function Navigation({ mobile = false, onNavigate, isTransparent =
                 >
                   <Link
                     href={child.href}
-                    scroll={child.href === '/#contact' || child.href === '/#services' ? false : undefined}
-                    onClick={(e) => {
-                      if ((child.href === '/#contact' || child.href === '/#services') && pathname === '/') {
-                        e.preventDefault();
-                      }
-                      handleLinkClick(child.href);
-                    }}
+                    scroll={!child.href.startsWith('/#')}
+                    onClick={(e) => handleLinkClick(e, child.href)}
                     className={
                       mobile
                         ? 'block py-2.5 px-4 rounded-lg text-secondary-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-200'
@@ -145,13 +162,8 @@ export default function Navigation({ mobile = false, onNavigate, isTransparent =
       <Link
         key={item.href}
         href={item.href}
-        scroll={item.href === '/#contact' || item.href === '/#services' ? false : undefined}
-        onClick={(e) => {
-          if ((item.href === '/#contact' || item.href === '/#services') && pathname === '/') {
-            e.preventDefault();
-          }
-          handleLinkClick(item.href);
-        }}
+        scroll={!item.href.startsWith('/#')}
+        onClick={(e) => handleLinkClick(e, item.href)}
         className={
           mobile
             ? `block py-3 px-4 rounded-lg ${textColorClass} transition-all duration-200 hover:bg-primary-50 ${
