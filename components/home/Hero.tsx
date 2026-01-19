@@ -37,8 +37,8 @@ export default function Hero() {
         <div className="max-w-5xl mx-auto text-center">
           {/* Badge */}
           <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-            animate={prefersReducedMotion ? false : { opacity: 1, y: 0 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
+            animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
             transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-white/60 shadow-sm mb-8"
           >
@@ -48,8 +48,8 @@ export default function Hero() {
 
           {/* Main Tagline */}
           <motion.h1
-            initial={prefersReducedMotion ? false : "initial"}
-            animate={prefersReducedMotion ? false : "animate"}
+            initial={prefersReducedMotion ? undefined : "initial"}
+            animate={prefersReducedMotion ? undefined : "animate"}
             variants={fadeInUp}
             transition={prefersReducedMotion ? { duration: 0 } : defaultTransition}
             className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-secondary-900 mb-8 text-balance"
@@ -60,8 +60,8 @@ export default function Hero() {
 
           {/* Sub Line */}
           <motion.p
-            initial={prefersReducedMotion ? false : "initial"}
-            animate={prefersReducedMotion ? false : "animate"}
+            initial={prefersReducedMotion ? undefined : "initial"}
+            animate={prefersReducedMotion ? undefined : "animate"}
             variants={fadeInUp}
             transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.2 }}
             className="text-xl text-secondary-600 mb-10 leading-relaxed max-w-3xl mx-auto"
@@ -71,8 +71,8 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <motion.div
-            initial={prefersReducedMotion ? false : "initial"}
-            animate={prefersReducedMotion ? false : "animate"}
+            initial={prefersReducedMotion ? undefined : "initial"}
+            animate={prefersReducedMotion ? undefined : "animate"}
             variants={staggerContainer}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
@@ -117,8 +117,8 @@ export default function Hero() {
 
           {/* Contact info */}
           <motion.div
-            initial={prefersReducedMotion ? false : "initial"}
-            animate={prefersReducedMotion ? false : "animate"}
+            initial={prefersReducedMotion ? undefined : "initial"}
+            animate={prefersReducedMotion ? undefined : "animate"}
             variants={fadeIn}
             transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.6 }}
             className="mt-12 flex flex-wrap justify-center gap-8 text-secondary-500 font-medium"

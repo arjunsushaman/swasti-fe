@@ -155,8 +155,8 @@ export default function ServicesSection() {
       <div className="container-custom relative z-10">
         <div className="text-center mb-16 max-w-4xl mx-auto">
           <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, scale: 0.9 }}
-            whileInView={prefersReducedMotion ? false : { opacity: 1, scale: 1 }}
+            initial={prefersReducedMotion ? undefined : { opacity: 0, scale: 0.9 }}
+            whileInView={prefersReducedMotion ? undefined : { opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={prefersReducedMotion ? { duration: 0 } : undefined}
             className="inline-block px-4 py-1.5 mb-6 text-sm font-semibold tracking-wider text-primary-700 bg-primary-100/80 rounded-full border border-primary-200 uppercase"

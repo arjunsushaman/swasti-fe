@@ -96,8 +96,8 @@ export default function Navigation({ mobile = false, onNavigate, isTransparent =
           </button>
           {(mobile ? openDropdown === item.label : true) && (
             <motion.div
-              initial={mobile ? { opacity: 0, height: 0 } : false}
-              animate={mobile ? { opacity: 1, height: 'auto' } : false}
+              initial={mobile ? { opacity: 0, height: 0 } : undefined}
+              animate={mobile ? { opacity: 1, height: 'auto' } : undefined}
               className={
                 mobile
                   ? 'pl-6 mt-2 space-y-1 overflow-hidden'
@@ -107,8 +107,8 @@ export default function Navigation({ mobile = false, onNavigate, isTransparent =
               {item.children!.map((child, index) => (
                 <motion.div
                   key={child.href}
-                  initial={!mobile ? { opacity: 0, x: -10 } : false}
-                  animate={!mobile ? { opacity: 1, x: 0 } : false}
+                  initial={!mobile ? { opacity: 0, x: -10 } : undefined}
+                  animate={!mobile ? { opacity: 1, x: 0 } : undefined}
                   transition={!mobile ? { delay: index * 0.05 } : undefined}
                 >
                   <Link
