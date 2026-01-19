@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect, FormEvent } from 'react';
-import { Input, Textarea, Select } from '@/components/ui/Input';
+import { Input, Textarea } from '@/components/ui/Input';
+import { DatePicker } from '@/components/ui/DatePicker';
+import { Dropdown } from '@/components/ui/Dropdown';
 import Button from '@/components/ui/Button';
 import { sendBookingEmail, initEmailJS } from '@/lib/emailjs';
 import { BookingFormData } from '@/types';
@@ -219,10 +221,9 @@ export default function BookingForm() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Input
+        <DatePicker
           label="Preferred Date"
           name="preferredDate"
-          type="date"
           value={formData.preferredDate}
           onChange={handleChange}
           error={errors.preferredDate}
@@ -230,7 +231,7 @@ export default function BookingForm() {
           required
         />
 
-        <Select
+        <Dropdown
           label="Preferred Time"
           name="preferredTime"
           value={formData.preferredTime}
@@ -242,7 +243,7 @@ export default function BookingForm() {
         />
       </div>
 
-      <Select
+      <Dropdown
         label="Service Required"
         name="service"
         value={formData.service}
@@ -253,7 +254,7 @@ export default function BookingForm() {
         required
       />
 
-      <Select
+      <Dropdown
         label="Preferred Doctor (Optional)"
         name="doctor"
         value={formData.doctor}
