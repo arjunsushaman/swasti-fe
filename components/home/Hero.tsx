@@ -121,7 +121,7 @@ export default function Hero() {
             animate={!mounted || prefersReducedMotion ? undefined : "animate"}
             variants={fadeIn}
             transition={!mounted || prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.6 }}
-            className="mt-12 flex flex-wrap justify-center gap-8 text-secondary-500 font-medium"
+            className="mt-6 md:mt-12 flex flex-wrap justify-center gap-4 md:gap-8 text-secondary-500 font-medium"
           >
             <a
               href={CONTACT_INFO.phoneLink}
