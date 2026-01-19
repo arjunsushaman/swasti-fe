@@ -40,13 +40,19 @@ async function fetchFromStrapi<T>(
     },
   };
 
-  const response = await fetch(`${STRAPI_URL}/api${endpoint}`, fetchOptions);
+  try {
+    const response = await fetch(`${STRAPI_URL}/api${endpoint}`, fetchOptions);
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch from Strapi: ${response.statusText}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch from Strapi: ${response.statusText}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    // During build time, if Strapi is not available, throw the error to be caught by callers
+    console.error(`Strapi fetch error for ${endpoint}:`, error);
+    throw error;
   }
-
-  return response.json();
 }
 
 // Clinic Info (Single Type)

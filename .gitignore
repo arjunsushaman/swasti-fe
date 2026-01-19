@@ -26,10 +26,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment files (keep .env.example committed)
+# Environment files
+# .env.local contains real secrets - never commit
 .env.local
-.env.production
+# .env.development can contain local dev config - don't commit
 .env.development
+# .env.production contains safe defaults - OK to commit (see VERCEL_SETUP.md)
+# Real production secrets should be set in Vercel dashboard
+!.env.production
 
 # Vercel
 .vercel
