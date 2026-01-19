@@ -51,7 +51,7 @@ export default async function BlogsPage() {
   const displayPosts = posts.length > 0 ? posts : DUMMY_POSTS
 
   return (
-    <div className="py-12 md:py-16">
+    <div className="pt-24 pb-16 md:pt-32 md:pb-24">
       <div className="container-custom">
         {/* Header */}
         <div className="text-center mb-12">

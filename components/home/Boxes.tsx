@@ -1,42 +1,81 @@
+'use client';
+
+import { motion } from 'framer-motion';
 import { VALUE_BOXES } from '@/lib/constants';
+import { AnimatedSection, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { hoverLift } from '@/lib/animations';
 
 interface BoxProps {
   icon: string;
   title: string;
   description: string;
+  index: number;
 }
 
-function Box({ icon, title, description }: BoxProps) {
+const gradients = [
+  'from-blue-100 to-indigo-100 text-indigo-600',
+  'from-teal-100 to-emerald-100 text-teal-600',
+  'from-purple-100 to-pink-100 text-purple-600',
+  'from-orange-100 to-amber-100 text-orange-600',
+];
+
+function Box({ icon, title, description, index }: BoxProps) {
+  const gradientClass = gradients[index % gradients.length];
+
   return (
-    <div className="card group hover:border-primary-200">
-      <div className="text-4xl mb-4" role="img" aria-label={title}>
+    <motion.div
+      whileHover={hoverLift}
+      className="glass-card p-8 rounded-2xl h-full border border-white/60 bg-white/40 hover:bg-white/80 transition-all duration-300"
+    >
+      <motion.div
+        className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${gradientClass} flex items-center justify-center text-3xl mb-6 shadow-sm`}
+        role="img"
+        aria-label={title}
+        whileHover={{ scale: 1.1, rotate: 5 }}
+        transition={{ duration: 0.2 }}
+      >
         {icon}
-      </div>
-      <h3 className="text-xl font-semibold text-secondary-900 mb-3 group-hover:text-primary-600 transition-colors">
+      </motion.div>
+      <h3 className="text-xl font-bold text-secondary-900 mb-3 hover:text-primary-600 transition-colors">
         {title}
       </h3>
-      <p className="text-secondary-600 leading-relaxed">{description}</p>
-    </div>
+      <p className="text-secondary-600 leading-relaxed font-medium">{description}</p>
+    </motion.div>
   );
 }
 
 export default function Boxes() {
   return (
-    <section className="py-16 md:py-24 bg-secondary-50">
-      <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="section-heading">Why Choose Swasti Lifecare?</h2>
-          <p className="section-subheading max-w-2xl mx-auto">
-            We are not just a clinic — we are a growing healthcare ecosystem designed around you.
+    <AnimatedSection className="py-24 bg-white relative">
+      {/* Background Decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary-50/50 rounded-full blur-3xl opacity-30" />
+      </div>
+
+      <div className="container-custom relative z-10">
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-accent-600 uppercase bg-accent-50 rounded-full"
+          >
+            Our Values
+          </motion.div>
+          <h2 className="text-3xl md:text-5xl font-bold text-secondary-900 mb-6">Why Choose Swasti?</h2>
+          <p className="section-subheading max-w-2xl mx-auto text-lg text-secondary-600">
+            We are not just a clinic — we are a growing healthcare ecosystem designed around your needs.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {VALUE_BOXES.map((box, index) => (
-            <Box key={index} icon={box.icon} title={box.title} description={box.description} />
+            <StaggerItem key={index}>
+              <Box icon={box.icon} title={box.title} description={box.description} index={index} />
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

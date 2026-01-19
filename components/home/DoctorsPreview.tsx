@@ -1,0 +1,68 @@
+'use client';
+
+import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { AnimatedSection, AnimatedDiv, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { hoverLift } from '@/lib/animations';
+import type { Doctor } from '@/types';
+
+interface DoctorsPreviewProps {
+  doctors: Doctor[];
+}
+
+export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
+  // Filter for featured doctors only, limit to 3
+  const featuredDoctors = doctors.filter(d => d.featured).slice(0, 3);
+
+  // If no featured doctors, show first 3
+  const displayDoctors = featuredDoctors.length > 0 ? featuredDoctors : doctors.slice(0, 3);
+
+  return (
+    <AnimatedSection className="py-24 bg-secondary-50 relative">
+      {/* Decorative Blob */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-[20%] right-[-5%] w-[500px] h-[500px] bg-primary-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-50" />
+        <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-accent-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-50" />
+      </div>
+
+      <div className="container-custom relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">Our Expert Doctors</h2>
+          <p className="section-subheading max-w-2xl mx-auto text-lg text-secondary-600">
+            Our team of experienced specialists brings advanced expertise right to your neighborhood.
+          </p>
+        </div>
+
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          {displayDoctors.map((doctor, index) => (
+            <StaggerItem key={doctor.name}>
+              <motion.div whileHover={hoverLift} className="glass-card p-6 h-full text-center hover:border-primary-300 transition-colors">
+                <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full flex items-center justify-center text-4xl shadow-inner border border-white overflow-hidden">
+                  {doctor.imageUrl ? (
+                    <img src={doctor.imageUrl} alt={doctor.name} className="w-full h-full object-cover" />
+                  ) : (
+                    '👨‍⚕️'
+                  )}
+                </div>
+                <h3 className="text-xl font-bold text-secondary-900 mb-2">{doctor.name}</h3>
+                <p className="text-primary-600 font-medium mb-1 text-sm uppercase tracking-wide">{doctor.qualifications}</p>
+                <p className="text-secondary-600 mb-4 font-medium">{doctor.specialtyLabel}</p>
+                <div className="inline-block px-3 py-1 bg-secondary-100 text-secondary-600 text-xs rounded-full">
+                  {doctor.availability}
+                </div>
+              </motion.div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
+
+        <AnimatedDiv delay={0.4} className="text-center">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
+            <Link href="/doctors" className="btn-primary shadow-lg shadow-primary-500/25">
+              View All Doctors
+            </Link>
+          </motion.div>
+        </AnimatedDiv>
+      </div>
+    </AnimatedSection>
+  );
+}

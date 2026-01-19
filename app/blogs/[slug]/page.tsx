@@ -201,7 +201,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   });
 
   return (
-    <article className="py-12 md:py-16">
+    <article className="pt-24 pb-12 md:pt-32 md:pb-16">
       <div className="container-custom">
         <div className="max-w-3xl mx-auto">
           {/* Back link */}

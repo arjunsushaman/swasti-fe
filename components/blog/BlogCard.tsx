@@ -1,6 +1,10 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { BlogPost } from '@/types';
+import { hoverLift } from '@/lib/animations';
 
 type BlogCardProps = Omit<BlogPost, 'id' | 'content'>;
 
@@ -19,18 +23,25 @@ export default function BlogCard({
   });
 
   return (
-    <article className="card group hover:border-primary-200">
+    <motion.article whileHover={hoverLift} className="card group hover:border-primary-200">
       <Link href={`/blogs/${slug}`} className="block">
         {/* Cover Image */}
         <div className="aspect-video bg-secondary-100 rounded-lg overflow-hidden mb-4 -mx-2 -mt-2">
           {coverImage ? (
-            <Image
-              src={coverImage}
-              alt={title}
-              width={400}
-              height={225}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="w-full h-full"
+            >
+              <Image
+                src={coverImage}
+                alt={title}
+                width={400}
+                height={225}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </motion.div>
           ) : (
             <div className="w-full h-full flex items-center justify-center">
               <svg
@@ -62,6 +73,6 @@ export default function BlogCard({
           <time dateTime={publicationDate}>{formattedDate}</time>
         </div>
       </Link>
-    </article>
+    </motion.article>
   );
 }

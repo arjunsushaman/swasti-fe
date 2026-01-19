@@ -5,11 +5,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://swastilifescare.co
 // Static pages
 const staticPages = [
   { url: '/', changefreq: 'weekly', priority: 1.0 },
-  { url: '/services', changefreq: 'weekly', priority: 0.9 },
   { url: '/doctors', changefreq: 'weekly', priority: 0.9 },
-  { url: '/labs', changefreq: 'monthly', priority: 0.8 },
-  { url: '/physiotherapy', changefreq: 'monthly', priority: 0.8 },
-  { url: '/home-care', changefreq: 'monthly', priority: 0.8 },
   { url: '/booking', changefreq: 'monthly', priority: 0.9 },
   { url: '/blogs', changefreq: 'weekly', priority: 0.7 },
   { url: '/contact', changefreq: 'monthly', priority: 0.6 },

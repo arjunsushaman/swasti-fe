@@ -39,7 +39,7 @@ export default function ReviewCard({
   });
 
   return (
-    <div className="card">
+    <div className="glass-card p-6 h-full hover:border-primary-300 transition-colors">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">

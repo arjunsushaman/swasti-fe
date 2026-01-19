@@ -101,7 +101,7 @@ export type DoctorSpecialty =
   | 'general-practice';
 
 export interface Doctor {
-  id: number;
+  id?: number;
   name: string;
   qualifications: string;
   specialty: DoctorSpecialty;
@@ -109,8 +109,9 @@ export interface Doctor {
   bio?: string;
   availability: string;
   image?: StrapiMedia;
+  imageUrl?: string; // Transformed URL from image.data.attributes.url
   featured: boolean;
-  order: number;
+  order?: number;
 }
 
 // Review

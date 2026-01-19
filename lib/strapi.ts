@@ -130,6 +130,21 @@ export async function getServicesByType(serviceType: string): Promise<Service[]>
   }
 }
 
+// Helper to transform Doctor with image to include imageUrl
+function transformDoctor(item: { id: number; attributes: Omit<Doctor, 'id'> }): Doctor {
+  const doctor = {
+    id: item.id,
+    ...item.attributes,
+  };
+
+  // Add imageUrl field from image.data.attributes.url
+  if (doctor.image?.data?.attributes?.url) {
+    doctor.imageUrl = getStrapiMediaUrl(doctor.image.data.attributes.url);
+  }
+
+  return doctor;
+}
+
 // Doctors
 export async function getDoctors(): Promise<Doctor[]> {
   try {
@@ -137,10 +152,7 @@ export async function getDoctors(): Promise<Doctor[]> {
       '/doctors?sort=order:asc&populate=image',
       { tags: ['doctors'] }
     );
-    return response.data.map((item) => ({
-      id: item.id,
-      ...item.attributes,
-    }));
+    return response.data.map(transformDoctor);
   } catch (error) {
     console.error('Error fetching doctors:', error);
     return [];
@@ -153,10 +165,7 @@ export async function getFeaturedDoctors(): Promise<Doctor[]> {
       '/doctors?filters[featured][$eq]=true&sort=order:asc&populate=image',
       { tags: ['doctors'] }
     );
-    return response.data.map((item) => ({
-      id: item.id,
-      ...item.attributes,
-    }));
+    return response.data.map(transformDoctor);
   } catch (error) {
     console.error('Error fetching featured doctors:', error);
     return [];

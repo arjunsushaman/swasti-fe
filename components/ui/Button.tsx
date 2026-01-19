@@ -1,9 +1,13 @@
-import { ButtonHTMLAttributes, forwardRef } from 'react';
+'use client';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+import { ButtonHTMLAttributes, forwardRef } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+
+interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
+  children?: React.ReactNode;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -26,10 +30,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     return (
-      <button
+      <motion.button
         ref={ref}
         className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
         disabled={disabled || isLoading}
+        whileHover={{ scale: disabled || isLoading ? 1 : 1.02 }}
+        whileTap={{ scale: disabled || isLoading ? 1 : 0.98 }}
+        transition={{ duration: 0.2 }}
         {...props}
       >
         {isLoading ? (
@@ -59,7 +66,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ) : (
           children
         )}
-      </button>
+      </motion.button>
     );
   }
 );

@@ -1,7 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import ReviewCard from './ReviewCard';
+import { AnimatedSection, AnimatedDiv, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { hoverLift } from '@/lib/animations';
 
 interface Review {
   id: number;
@@ -80,13 +83,21 @@ export default function ReviewsSection() {
       : '5.0';
 
   return (
-    <section className="py-16 md:py-24 bg-secondary-50">
-      <div className="container-custom">
+    <AnimatedSection className="py-24 bg-white relative overflow-hidden">
+      {/* Decorative Background Blobs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[20%] right-[-5%] w-[500px] h-[500px] bg-primary-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-50" />
+        <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-accent-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-50" />
+      </div>
+
+      <div className="container-custom relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="section-heading">What Our Patients Say</h2>
-          <p className="section-subheading max-w-2xl mx-auto">
-            Read reviews from our patients and learn about their experiences at Swasti Lifecare.
+        <AnimatedDiv className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
+            What Our Patients Say
+          </h2>
+          <p className="text-lg text-secondary-600 max-w-2xl mx-auto">
+            Real experiences from families we&apos;ve served
           </p>
           {/* Rating summary */}
           <div className="mt-6 flex items-center justify-center gap-3">
@@ -109,7 +120,7 @@ export default function ReviewsSection() {
             <span className="text-2xl font-bold text-secondary-900">{averageRating}</span>
             <span className="text-secondary-500">({reviews.length} reviews)</span>
           </div>
-        </div>
+        </AnimatedDiv>
 
         {error && (
           <p className="text-center text-secondary-500 text-sm mb-6">{error}</p>
@@ -136,19 +147,22 @@ export default function ReviewsSection() {
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {reviews.map((review) => (
-              <ReviewCard
-                key={review.id}
-                reviewerName={review.reviewerName}
-                rating={review.rating}
-                reviewDate={review.reviewDate}
-                reviewText={review.reviewText}
-                source={review.source}
-                verified={review.verified}
-              />
+              <StaggerItem key={review.id}>
+                <motion.div whileHover={hoverLift} className="h-full">
+                  <ReviewCard
+                    reviewerName={review.reviewerName}
+                    rating={review.rating}
+                    reviewDate={review.reviewDate}
+                    reviewText={review.reviewText}
+                    source={review.source}
+                    verified={review.verified}
+                  />
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         )}
 
         {/* Leave a Review CTA */}
@@ -183,6 +197,6 @@ export default function ReviewsSection() {
           </div>
         </div>
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

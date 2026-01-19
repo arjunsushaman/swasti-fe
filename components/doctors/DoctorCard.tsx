@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { hoverLift } from '@/lib/animations';
 
 interface DoctorCardProps {
   name: string;
@@ -18,19 +22,25 @@ export default function DoctorCard({
   bio,
 }: DoctorCardProps) {
   return (
-    <div className="card">
+    <motion.div whileHover={hoverLift} className="card">
       <div className="flex flex-col sm:flex-row gap-6">
         {/* Image */}
         <div className="flex-shrink-0">
           <div className="w-32 h-32 mx-auto sm:mx-0 bg-primary-100 rounded-xl overflow-hidden">
             {imageUrl ? (
-              <Image
-                src={imageUrl}
-                alt={name}
-                width={128}
-                height={128}
-                className="w-full h-full object-cover"
-              />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src={imageUrl}
+                  alt={name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
+              </motion.div>
             ) : (
               <div className="w-full h-full flex items-center justify-center">
                 <svg
@@ -75,6 +85,6 @@ export default function DoctorCard({
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

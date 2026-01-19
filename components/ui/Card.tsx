@@ -1,4 +1,8 @@
+'use client';
+
 import { ReactNode } from 'react';
+import { motion } from 'framer-motion';
+import { hoverLift } from '@/lib/animations';
 
 interface CardProps {
   children: ReactNode;
@@ -7,11 +11,20 @@ interface CardProps {
 }
 
 export default function Card({ children, className = '', hover = true }: CardProps) {
+  if (hover) {
+    return (
+      <motion.div
+        whileHover={hoverLift}
+        className={`rounded-xl border border-secondary-200 bg-white p-6 shadow-sm transition-all duration-200 ${className}`}
+      >
+        {children}
+      </motion.div>
+    );
+  }
+
   return (
     <div
-      className={`rounded-xl border border-secondary-200 bg-white p-6 shadow-sm ${
-        hover ? 'transition-shadow duration-200 hover:shadow-md' : ''
-      } ${className}`}
+      className={`rounded-xl border border-secondary-200 bg-white p-6 shadow-sm ${className}`}
     >
       {children}
     </div>
