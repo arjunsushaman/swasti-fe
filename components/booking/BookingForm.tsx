@@ -165,6 +165,14 @@ export default function BookingForm() {
     }
   };
 
+  const handleCustomChange = (e: { target: { name: string; value: string } }) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name as keyof FormErrors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
   const getTodayString = () => {
     const today = new Date();
     return today.toISOString().split('T')[0];
@@ -225,7 +233,7 @@ export default function BookingForm() {
           label="Preferred Date"
           name="preferredDate"
           value={formData.preferredDate}
-          onChange={handleChange}
+          onChange={handleCustomChange}
           error={errors.preferredDate}
           min={getTodayString()}
           required
@@ -235,7 +243,7 @@ export default function BookingForm() {
           label="Preferred Time"
           name="preferredTime"
           value={formData.preferredTime}
-          onChange={handleChange}
+          onChange={handleCustomChange}
           error={errors.preferredTime}
           options={timeSlots}
           placeholder="Select a time slot"
@@ -247,7 +255,7 @@ export default function BookingForm() {
         label="Service Required"
         name="service"
         value={formData.service}
-        onChange={handleChange}
+        onChange={handleCustomChange}
         error={errors.service}
         options={serviceOptions}
         placeholder="Select a service"
@@ -258,7 +266,7 @@ export default function BookingForm() {
         label="Preferred Doctor (Optional)"
         name="doctor"
         value={formData.doctor}
-        onChange={handleChange}
+        onChange={handleCustomChange}
         options={doctorOptions}
       />
 
