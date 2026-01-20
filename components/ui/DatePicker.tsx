@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface DatePickerProps {
   label?: string;
   name: string;
-  value: string;
+  value?: string;
   onChange: (e: { target: { name: string; value: string } }) => void;
   error?: string;
   required?: boolean;

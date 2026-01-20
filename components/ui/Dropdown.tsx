@@ -11,7 +11,7 @@ interface DropdownOption {
 interface DropdownProps {
   label?: string;
   name: string;
-  value: string;
+  value?: string;
   onChange: (e: { target: { name: string; value: string } }) => void;
   options: DropdownOption[];
   error?: string;
