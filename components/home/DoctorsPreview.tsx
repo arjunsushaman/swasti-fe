@@ -1,8 +1,9 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { AnimatedSection, AnimatedDiv, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
+import { AnimatedSection, AnimatedDiv } from '@/components/ui/Motion';
 import { hoverLift } from '@/lib/animations';
 import type { Doctor } from '@/types';
 
@@ -11,11 +12,25 @@ interface DoctorsPreviewProps {
 }
 
 export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
-  // Filter for featured doctors only, limit to 3
-  const featuredDoctors = doctors.filter(d => d.featured).slice(0, 3);
+  // Filter for featured doctors only
+  const featuredDoctors = doctors.filter(d => d.featured);
 
-  // If no featured doctors, show first 3
-  const displayDoctors = featuredDoctors.length > 0 ? featuredDoctors : doctors.slice(0, 3);
+  // If no featured doctors, show all
+  const displayDoctors = featuredDoctors.length > 0 ? featuredDoctors : doctors;
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => Math.min(displayDoctors.length - 2, prev + 1));
+  };
+
+  const canGoPrev = currentIndex > 0;
+  const canGoNext = currentIndex < displayDoctors.length - 2;
 
   return (
     <AnimatedSection className="py-24 bg-secondary-50 relative">
@@ -33,27 +48,90 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
           </p>
         </div>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {displayDoctors.map((doctor, index) => (
-            <StaggerItem key={doctor.name}>
-              <motion.div whileHover={hoverLift} className="glass-card p-6 h-full text-center hover:border-primary-300 transition-colors">
-                <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-br from-primary-100 to-primary-50 rounded-full flex items-center justify-center text-4xl shadow-inner border border-white overflow-hidden">
-                  {doctor.imageUrl ? (
-                    <img src={doctor.imageUrl} alt={doctor.name} className="w-full h-full object-cover" />
-                  ) : (
-                    '👨‍⚕️'
-                  )}
-                </div>
-                <h3 className="text-xl font-bold text-secondary-900 mb-2">{doctor.name}</h3>
-                <p className="text-primary-600 font-medium mb-1 text-sm uppercase tracking-wide">{doctor.qualifications}</p>
-                <p className="text-secondary-600 mb-4 font-medium">{doctor.specialtyLabel}</p>
-                <div className="inline-block px-3 py-1 bg-secondary-100 text-secondary-600 text-xs rounded-full">
-                  {doctor.availability}
-                </div>
-              </motion.div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        <div className="relative mb-12">
+          {/* Navigation Buttons */}
+          {displayDoctors.length > 2 && (
+            <>
+              <button
+                onClick={handlePrev}
+                disabled={!canGoPrev}
+                className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-12 h-12 rounded-full bg-white shadow-lg border border-secondary-200 flex items-center justify-center transition-all ${
+                  canGoPrev ? 'hover:bg-primary-50 hover:border-primary-300 text-secondary-900' : 'opacity-40 cursor-not-allowed text-secondary-400'
+                }`}
+                aria-label="Previous doctor"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <button
+                onClick={handleNext}
+                disabled={!canGoNext}
+                className={`absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-12 h-12 rounded-full bg-white shadow-lg border border-secondary-200 flex items-center justify-center transition-all ${
+                  canGoNext ? 'hover:bg-primary-50 hover:border-primary-300 text-secondary-900' : 'opacity-40 cursor-not-allowed text-secondary-400'
+                }`}
+                aria-label="Next doctor"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </>
+          )}
+
+          {/* Carousel Container */}
+          <div className="overflow-hidden" ref={carouselRef}>
+            <motion.div
+              className="flex gap-6"
+              animate={{ x: `${-currentIndex * 50}%` }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            >
+              {displayDoctors.map((doctor, index) => (
+                <motion.div
+                  key={doctor.name}
+                  className="min-w-[calc(50%-12px)] flex-shrink-0"
+                  whileHover={hoverLift}
+                >
+                  <div className="glass-card p-6 h-full hover:border-primary-300 transition-colors">
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <div className="w-24 h-24 flex-shrink-0 mx-auto sm:mx-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-xl flex items-center justify-center text-4xl shadow-inner border border-white overflow-hidden">
+                        {doctor.imageUrl ? (
+                          <img src={doctor.imageUrl} alt={doctor.name} className="w-full h-full object-cover" />
+                        ) : (
+                          '👨‍⚕️'
+                        )}
+                      </div>
+                      <div className="flex-1 text-center sm:text-left">
+                        <h3 className="text-xl font-bold text-secondary-900 mb-2">{doctor.name}</h3>
+                        <p className="text-primary-600 font-medium mb-1 text-sm uppercase tracking-wide">{doctor.qualifications}</p>
+                        <p className="text-secondary-600 mb-3 font-medium">{doctor.specialtyLabel}</p>
+                        <div className="inline-block px-3 py-1 bg-secondary-100 text-secondary-600 text-xs rounded-full">
+                          {doctor.availability}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Dots Indicator */}
+          {displayDoctors.length > 2 && (
+            <div className="flex justify-center gap-2 mt-8">
+              {Array.from({ length: displayDoctors.length - 1 }).map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    currentIndex === index ? 'bg-primary-600 w-8' : 'bg-secondary-300 hover:bg-secondary-400'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
 
         <AnimatedDiv delay={0.4} className="text-center">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="inline-block">
