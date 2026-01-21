@@ -188,7 +188,7 @@ export default function Navigation({ mobile = false, onNavigate, isTransparent =
 
   return (
     <nav
-      className={mobile ? 'flex flex-col space-y-2' : 'hidden md:flex items-center space-x-2 lg:space-x-3'}
+      className={mobile ? 'flex flex-col space-y-2' : 'hidden lg:flex items-center space-x-2 xl:space-x-3'}
       role="navigation"
       aria-label="Main navigation"
     >

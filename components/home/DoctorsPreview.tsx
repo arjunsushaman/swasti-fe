@@ -12,10 +12,10 @@ interface DoctorsPreviewProps {
 
 export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
   // Filter for featured doctors only, limit to 3
-  const featuredDoctors = doctors.filter(d => d.featured).slice(0, 3);
+  const featuredDoctors = doctors.filter(d => d.featured).slice(0, 6);
 
   // If no featured doctors, show first 3
-  const displayDoctors = featuredDoctors.length > 0 ? featuredDoctors : doctors.slice(0, 3);
+  const displayDoctors = featuredDoctors.length > 0 ? featuredDoctors : doctors.slice(0, 6);
 
   return (
     <AnimatedSection className="py-24 bg-secondary-50 relative">
@@ -33,7 +33,7 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
           </p>
         </div>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {displayDoctors.map((doctor, index) => (
             <StaggerItem key={doctor.name}>
               <motion.div whileHover={hoverLift} className="glass-card p-6 h-full hover:border-primary-300 transition-colors">

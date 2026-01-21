@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -16,13 +16,50 @@ export default function Header() {
   const isScrolled = useScrollListener(threshold);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const headerRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside or pressing Escape
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileMenuOpen &&
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    if (mobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscapeKey);
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore body scroll when menu is closed
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscapeKey);
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <header
+      ref={headerRef}
       className={`
         fixed top-0 w-full z-50 transition-all ease-in-out
         ${prefersReducedMotion ? 'duration-100' : (isMobile ? 'duration-300' : 'duration-500')}
-        ${isHomePage && !isScrolled
+        ${isHomePage && !isScrolled && !mobileMenuOpen
           ? 'bg-transparent shadow-none'
           : 'bg-white/95 backdrop-blur-md shadow-lg border-b border-primary-100/20'
         }
@@ -30,7 +67,9 @@ export default function Header() {
     >
       {/* Main header */}
       <div className="container-custom">
-        <div className="flex justify-between items-center py-2 md:py-3">
+        <div className={`flex justify-between items-center transition-all duration-300 ${
+          isHomePage && !isScrolled && !mobileMenuOpen ? 'py-3' : 'py-2 lg:py-3'
+        }`}>
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
@@ -38,22 +77,24 @@ export default function Header() {
               alt="Swasti Lifecare"
               width={140}
               height={66}
-              className="h-9 md:h-12 w-auto transition-all duration-300 group-hover:scale-105"
+              className={`w-auto transition-all duration-300 group-hover:scale-105 ${
+                isHomePage && !isScrolled && !mobileMenuOpen ? 'h-10 lg:h-12' : 'h-9 lg:h-12'
+              }`}
               priority
             />
           </Link>
 
           {/* Desktop Navigation */}
-          <Navigation isTransparent={isHomePage && !isScrolled} />
+          <Navigation isTransparent={isHomePage && !isScrolled && !mobileMenuOpen} />
 
           {/* CTA Button - Desktop */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             {!prefersReducedMotion ? (
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
                   href="/booking"
                   className={`inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-xl group
-                    ${isHomePage && !isScrolled
+                    ${isHomePage && !isScrolled && !mobileMenuOpen
                       ? 'bg-primary-600 text-white hover:bg-primary-700 border-2 border-primary-600'
                       : 'bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800'
                     }
@@ -69,7 +110,7 @@ export default function Header() {
               <Link
                 href="/booking"
                 className={`inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-xl group
-                  ${isHomePage && !isScrolled
+                  ${isHomePage && !isScrolled && !mobileMenuOpen
                     ? 'bg-primary-600 text-white hover:bg-primary-700 border-2 border-primary-600'
                     : 'bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800'
                   }
@@ -83,11 +124,11 @@ export default function Header() {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile/Tablet menu button */}
           <motion.button
             whileTap={prefersReducedMotion ? undefined : { scale: 0.9 }}
-            className={`md:hidden p-2 rounded-lg transition-all duration-300 ${
-              isHomePage && !isScrolled
+            className={`lg:hidden p-2 rounded-lg transition-all duration-300 ${
+              isHomePage && !isScrolled && !mobileMenuOpen
                 ? 'text-secondary-900 hover:bg-secondary-900/5'
                 : 'text-secondary-600 hover:bg-primary-50 hover:text-primary-600'
             }`}
@@ -129,7 +170,7 @@ export default function Header() {
           </motion.button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile/Tablet Navigation */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -137,9 +178,9 @@ export default function Header() {
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="md:hidden overflow-hidden"
+              className="lg:hidden overflow-hidden bg-white/98 backdrop-blur-md"
             >
-              <div className="py-6 px-2 border-t border-primary-100/30 bg-gradient-to-b from-white to-primary-50/30 rounded-b-2xl">
+              <div className="py-6 px-2 border-t border-primary-100/50 bg-gradient-to-b from-white via-primary-50/20 to-primary-50/40 rounded-b-2xl shadow-lg">
                 <Navigation mobile onNavigate={() => setMobileMenuOpen(false)} isTransparent={false} />
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
