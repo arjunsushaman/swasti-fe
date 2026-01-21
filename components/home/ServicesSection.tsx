@@ -93,7 +93,7 @@ const SERVICES: ServiceDetail[] = [
     id: 'home-care',
     emoji: 'hc',
     title: 'Home Care Services',
-    description: 'Healthcare services delivered at home for patient convenience and continuity of care.',
+    description: 'Healthcare services delivered at home for convenience and continuity of care.',
     gradient: 'from-rose-50 to-red-50',
     details: [
       'Doctor home visits',
@@ -182,8 +182,8 @@ export default function ServicesSection() {
                   layout={!isMobile} // Disable smooth layout transitions on mobile for performance
                   onClick={() => handleCardClick(index)}
                   className={`group relative bg-white rounded-3xl border shadow-sm transition-all duration-300 flex flex-col overflow-hidden cursor-pointer ${isExpanded
-                      ? 'border-primary-300 shadow-xl ring-1 ring-primary-100'
-                      : 'border-secondary-200 hover:border-primary-200 hover:shadow-lg'
+                    ? 'border-primary-300 shadow-xl ring-1 ring-primary-100'
+                    : 'border-secondary-200 hover:border-primary-200 hover:shadow-lg'
                     }`}
                 >
                   {/* Min height container for top section to ensure alignment when collapsed */}
@@ -193,30 +193,28 @@ export default function ServicesSection() {
 
                     <div className="relative z-10 p-8">
                       <div className="flex items-start justify-between mb-4">
-                        {/* Icon */}
-                        <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-secondary-100 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
-                          {getIcon(service.emoji)}
+                        <div className="flex items-center gap-4 flex-1">
+                          {/* Icon */}
+                          <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-secondary-100 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                            {getIcon(service.emoji)}
+                          </div>
+
+                          {/* Title */}
+                          <h3 className="text-2xl font-bold text-secondary-900 group-hover:text-primary-700 transition-colors">
+                            {service.title}
+                          </h3>
                         </div>
 
                         {/* Chevron */}
-                        <div className={`w-8 h-8 rounded-full bg-white/50 border border-secondary-200 flex items-center justify-center text-secondary-500 transition-transform duration-300 ${isExpanded ? 'rotate-180 bg-primary-50 text-primary-600 border-primary-200' : ''}`}>
+                        <div className={`w-8 h-8 rounded-full bg-white/50 border border-secondary-200 flex items-center justify-center text-secondary-500 transition-transform duration-300 flex-shrink-0 ${isExpanded ? 'rotate-180 bg-primary-50 text-primary-600 border-primary-200' : ''}`}>
                           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
                         </div>
                       </div>
 
-                      {/* Title & Desc - Fixed height-ish area to align collapsed row? 
-                          Actually let's just let it be natural. Since it's "same row", expanding one expands all, 
-                          so height will align naturally via Grid + items-stretch (if we used it) or we accept varied heights (items-start).
-                          User asked for "neat". items-stretch with expanding content is risky if content varies WILDLY. 
-                          But "same row expand" forces them to match height if we use Flex/Grid stretch. 
-                          Let's try sticking to 'h-full' on content.
-                      */}
+                      {/* Description */}
                       <div>
-                        <h3 className="text-2xl font-bold text-secondary-900 mb-2 group-hover:text-primary-700 transition-colors">
-                          {service.title}
-                        </h3>
                         <p className="text-secondary-600 leading-relaxed font-medium">
                           {service.description}
                         </p>

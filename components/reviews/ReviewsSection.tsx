@@ -1,82 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ReviewCard from './ReviewCard';
 import { AnimatedSection, AnimatedDiv, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { hoverLift } from '@/lib/animations';
 import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
-
-interface Review {
-  id: number;
-  reviewerName: string;
-  rating: number;
-  reviewDate: string;
-  reviewText: string;
-  source: string;
-  verified: boolean;
-}
-
-// Placeholder reviews for demonstration
-const PLACEHOLDER_REVIEWS: Review[] = [
-  {
-    id: 1,
-    reviewerName: 'Rahul K.',
-    rating: 5,
-    reviewDate: '2024-01-10T10:00:00Z',
-    reviewText:
-      'Excellent care and attention. Dr. Nisha took the time to understand my concerns and explained everything clearly. The clinic is clean and well-maintained. Highly recommend!',
-    source: 'Google',
-    verified: true,
-  },
-  {
-    id: 2,
-    reviewerName: 'Priya M.',
-    rating: 5,
-    reviewDate: '2024-01-05T10:00:00Z',
-    reviewText:
-      'Very happy with the neurology consultation. Dr. Suresh Kumar is very knowledgeable and patient. The neuro diagnostic facilities are excellent.',
-    source: 'Google',
-    verified: true,
-  },
-  {
-    id: 3,
-    reviewerName: 'Thomas J.',
-    rating: 4,
-    reviewDate: '2023-12-20T10:00:00Z',
-    reviewText:
-      'Good experience overall. The staff is friendly and the wait time was reasonable. Lab results were delivered quickly.',
-    source: 'Facebook',
-    verified: false,
-  },
-];
+import { REVIEWS_DATA } from '@/lib/content';
 
 export default function ReviewsSection() {
   const { prefersReducedMotion, isMobile } = useMotionPreferences();
-  const [reviews, setReviews] = useState<Review[]>(PLACEHOLDER_REVIEWS);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchReviews() {
-      try {
-        const response = await fetch('/api/reviews');
-        if (response.ok) {
-          const data = await response.json();
-          if (data.reviews && data.reviews.length > 0) {
-            setReviews(data.reviews);
-          }
-        }
-      } catch (err) {
-        console.error('Error fetching reviews:', err);
-        setError('Unable to load reviews. Showing sample reviews.');
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchReviews();
-  }, []);
+  const reviews = REVIEWS_DATA;
 
   // Calculate average rating
   const averageRating =
@@ -124,48 +57,23 @@ export default function ReviewsSection() {
           </div>
         </AnimatedDiv>
 
-        {error && (
-          <p className="text-center text-secondary-500 text-sm mb-6">{error}</p>
-        )}
-
         {/* Reviews Grid */}
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className={`card ${!prefersReducedMotion ? 'animate-pulse' : ''}`}>
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-secondary-200 rounded-full" />
-                  <div className="flex-1">
-                    <div className="h-4 bg-secondary-200 rounded w-24 mb-2" />
-                    <div className="h-3 bg-secondary-100 rounded w-32" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="h-3 bg-secondary-100 rounded" />
-                  <div className="h-3 bg-secondary-100 rounded" />
-                  <div className="h-3 bg-secondary-100 rounded w-3/4" />
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {reviews.map((review) => (
-              <StaggerItem key={review.id}>
-                <motion.div whileHover={hoverLift} className="h-full">
-                  <ReviewCard
-                    reviewerName={review.reviewerName}
-                    rating={review.rating}
-                    reviewDate={review.reviewDate}
-                    reviewText={review.reviewText}
-                    source={review.source}
-                    verified={review.verified}
-                  />
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        )}
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {reviews.map((review) => (
+            <StaggerItem key={review.id}>
+              <motion.div whileHover={hoverLift} className="h-full">
+                <ReviewCard
+                  reviewerName={review.reviewerName}
+                  rating={review.rating}
+                  reviewDate={review.reviewDate}
+                  reviewText={review.reviewText}
+                  source={review.source}
+                  verified={review.verified}
+                />
+              </motion.div>
+            </StaggerItem>
+          ))}
+        </StaggerContainer>
 
         {/* Leave a Review CTA */}
         <div className="mt-12 text-center">

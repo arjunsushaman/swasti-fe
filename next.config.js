@@ -1,27 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '1337',
-        pathname: '/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.strapi.io',
-        pathname: '/uploads/**',
-      },
-      // Add your production Strapi domain here when available
-      // Example:
-      // {
-      //   protocol: 'https',
-      //   hostname: 'your-strapi-domain.com',
-      //   pathname: '/uploads/**',
-      // },
-    ],
-  },
   async rewrites() {
     return [
       {

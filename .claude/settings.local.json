@@ -4,7 +4,10 @@
       "Bash(git show:*)",
       "Bash(git push:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(npm install)",
+      "Bash(timeout 30 npm run dev:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

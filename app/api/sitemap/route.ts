@@ -7,15 +7,8 @@ const staticPages = [
   { url: '/', changefreq: 'weekly', priority: 1.0 },
   { url: '/doctors', changefreq: 'weekly', priority: 0.9 },
   { url: '/booking', changefreq: 'monthly', priority: 0.9 },
-  { url: '/blogs', changefreq: 'weekly', priority: 0.7 },
+  { url: '/homecare', changefreq: 'monthly', priority: 0.9 },
   { url: '/contact', changefreq: 'monthly', priority: 0.6 },
-];
-
-// Blog posts (in production, would fetch from Strapi)
-const blogSlugs = [
-  'importance-of-regular-health-checkups',
-  'managing-chronic-pain-tips',
-  'benefits-of-physiotherapy-after-surgery',
 ];
 
 export async function GET() {
@@ -31,17 +24,6 @@ export async function GET() {
     <lastmod>${lastmod}</lastmod>
     <changefreq>${page.changefreq}</changefreq>
     <priority>${page.priority}</priority>
-  </url>`
-    )
-    .join('')}
-  ${blogSlugs
-    .map(
-      (slug) => `
-  <url>
-    <loc>${SITE_URL}/blogs/${slug}</loc>
-    <lastmod>${lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
   </url>`
     )
     .join('')}

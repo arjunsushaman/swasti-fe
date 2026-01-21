@@ -1,59 +1,3 @@
-import type { BlocksContent } from '@strapi/blocks-react-renderer';
-
-// Strapi response wrapper types
-export interface StrapiResponse<T> {
-  data: T;
-  meta?: {
-    pagination?: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
-}
-
-export interface StrapiSingleResponse<T> {
-  data: {
-    id: number;
-    attributes: T;
-  };
-}
-
-export interface StrapiCollectionResponse<T> {
-  data: Array<{
-    id: number;
-    attributes: T;
-  }>;
-  meta?: {
-    pagination?: {
-      page: number;
-      pageSize: number;
-      pageCount: number;
-      total: number;
-    };
-  };
-}
-
-// Media type
-export interface StrapiMedia {
-  data: {
-    id: number;
-    attributes: {
-      url: string;
-      alternativeText?: string;
-      width?: number;
-      height?: number;
-      formats?: {
-        thumbnail?: { url: string };
-        small?: { url: string };
-        medium?: { url: string };
-        large?: { url: string };
-      };
-    };
-  } | null;
-}
-
 // Clinic Info (Single Type)
 export interface ClinicInfo {
   mainLine: string;
@@ -108,8 +52,7 @@ export interface Doctor {
   specialtyLabel: string;
   bio?: string;
   availability: string;
-  image?: StrapiMedia;
-  imageUrl?: string; // Transformed URL from image.data.attributes.url
+  imageUrl?: string;
   featured: boolean;
   order?: number;
 }
@@ -124,30 +67,6 @@ export interface Review {
   source: string;
   verified: boolean;
   published: boolean;
-}
-
-// Blog
-export interface Blog {
-  id: number;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string;
-  coverImage?: StrapiMedia;
-  author: string;
-  publicationDate: string;
-}
-
-// Blog post for component consumption (transformed from Blog)
-export interface BlogPost {
-  id: number;
-  title: string;
-  slug: string;
-  excerpt: string;
-  content: string | BlocksContent; // Support both HTML strings and Strapi blocks
-  coverImage?: string; // String URL instead of StrapiMedia
-  author: string;
-  publicationDate: string;
 }
 
 // Booking Form

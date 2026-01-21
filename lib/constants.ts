@@ -7,7 +7,7 @@ export const MAIN_LINE = 'Clarity. Compassion. Care that continues.';
 
 export const SUB_LINE = `At Swasti Lifecare, healthcare is not rushed or impersonal. It is calm, thoughtful, and centred around the person sitting in front of us. We believe patients heal better when they feel understood, reassured, and supported.`;
 
-export const INTRO_TEXT = `Swasti Lifecare is built on the principles of trust, clarity, and respectful medical care. We believe that effective healthcare begins with listening carefully, understanding the individual behind the symptoms, and explaining medical concerns in a clear and honest manner. Rather than focusing on a single complaint, our approach considers overall health, underlying factors, and long-term wellbeing. Consultations at Swasti Lifecare are thoughtful and unhurried, allowing patients the space to speak openly and participate in informed decision-making. Our responsibility extends beyond diagnosis and treatment—we continue to guide patients after consultations and ensure appropriate follow-up and referrals when needed, so every individual feels supported at every step of their care journey.`;
+export const INTRO_TEXT = `Swasti Lifecare is built on trust, clarity, and respectful medical care. We focus on listening carefully, understanding the person behind the symptoms, and explaining health concerns honestly and clearly. Our approach looks beyond a single complaint to support overall health and long-term wellbeing. Care at Swasti Lifecare continues beyond consultation, with guidance, follow-up, and support at every step.`;
 
 export const CONTACT_INFO = {
   phone: '+91-8547734214',
@@ -25,7 +25,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
   { label: 'Services', href: '/#services' },
   { label: 'Doctors', href: '/doctors' },
-  { label: 'Blog', href: '/blogs' },
+  { label: 'Homecare', href: '/homecare' },
   { label: 'Contact', href: '/#contact' },
 ];
 
