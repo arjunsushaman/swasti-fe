@@ -14,33 +14,33 @@ export {
 export const REVIEWS_DATA: Review[] = [
   {
     id: 1,
-    reviewerName: 'Rahul K.',
+    reviewerName: 'Sruthy Panikar',
     rating: 5,
-    reviewDate: '2024-01-10T10:00:00Z',
+    reviewDate: '2025-06-06T10:14:00Z',
     reviewText:
-      'Excellent care and attention. Dr. Nisha took the time to understand my concerns and explained everything clearly. The clinic is clean and well-maintained. Highly recommend!',
+      'l am so grateful for the excellent care I received at SWASTI LIFECARE..Dr Vishnu was knowledgeable, compassionate,and took the time to explain everything in a way that made me feel comfortable.I would highly recommend this hospital to anyone looking for good medical care.Thank you for providing such excellent care🙏🥰',
     source: 'Google',
     verified: true,
     published: true,
   },
   {
     id: 2,
-    reviewerName: 'Priya M.',
+    reviewerName: 'Ameen Salim',
     rating: 5,
-    reviewDate: '2024-01-05T10:00:00Z',
+    reviewDate: '2025-07-14T10:14:00Z',
     reviewText:
-      'Very happy with the neurology consultation. Dr. Suresh Kumar is very knowledgeable and patient. The neuro diagnostic facilities are excellent.',
+      'I have got professional care at affordable cost.The Doctor was very kind,attentive to my ailments and took time to explain everything clearly.Nurses and staffs were compassionate and always available.Highly recommend this hospital to everyone looking for affordable quality care.',
     source: 'Google',
     verified: true,
     published: true,
   },
   {
     id: 3,
-    reviewerName: 'Thomas J.',
-    rating: 4,
-    reviewDate: '2023-12-20T10:00:00Z',
+    reviewerName: 'Sinan Miv',
+    rating: 5,
+    reviewDate: '2025-05-29T10:14:00Z',
     reviewText:
-      'Good experience overall. The staff is friendly and the wait time was reasonable. Lab results were delivered quickly.',
+      'One of the best primary care clinics I’ve been to. The clinic is clean, well-organized, and the staff are friendly and efficient. But what really stood out was the doctor — truly one of the most decent and communicative professionals I’ve met. You can really tell they care.',
     source: 'Facebook',
     verified: false,
     published: true,
