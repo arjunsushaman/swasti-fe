@@ -5,10 +5,14 @@ import ReviewCard from './ReviewCard';
 import { AnimatedSection, AnimatedDiv, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { hoverLift } from '@/lib/animations';
 import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
+import { useBreakpoint } from '@/lib/hooks/useBreakpoint';
+import Carousel from '@/components/ui/Carousel';
 import { REVIEWS_DATA } from '@/lib/content';
+import type { CarouselConfig } from '@/types';
 
 export default function ReviewsSection() {
   const { prefersReducedMotion, isMobile } = useMotionPreferences();
+  const { isDesktop } = useBreakpoint();
   const reviews = REVIEWS_DATA;
 
   // Calculate average rating
@@ -16,6 +20,30 @@ export default function ReviewsSection() {
     reviews.length > 0
       ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1)
       : '5.0';
+
+  // Carousel configuration
+  const carouselConfig: CarouselConfig = {
+    itemsPerView: { mobile: 1, tablet: 2, desktop: 3 },
+    gap: 32, // Match Tailwind gap-8 (8 * 4px = 32px)
+    dragEnabled: true,
+    showDots: true,
+    showArrows: false,
+    loop: false,
+  };
+
+  // Render review card function
+  const renderReviewCard = (review: typeof reviews[0]) => (
+    <motion.div whileHover={hoverLift} className="h-full">
+      <ReviewCard
+        reviewerName={review.reviewerName}
+        rating={review.rating}
+        reviewDate={review.reviewDate}
+        reviewText={review.reviewText}
+        source={review.source}
+        verified={review.verified}
+      />
+    </motion.div>
+  );
 
   return (
     <AnimatedSection className="py-24 bg-white relative overflow-hidden">
@@ -57,23 +85,28 @@ export default function ReviewsSection() {
           </div>
         </AnimatedDiv>
 
-        {/* Reviews Grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reviews.map((review) => (
-            <StaggerItem key={review.id}>
-              <motion.div whileHover={hoverLift} className="h-full">
-                <ReviewCard
-                  reviewerName={review.reviewerName}
-                  rating={review.rating}
-                  reviewDate={review.reviewDate}
-                  reviewText={review.reviewText}
-                  source={review.source}
-                  verified={review.verified}
-                />
-              </motion.div>
-            </StaggerItem>
-          ))}
-        </StaggerContainer>
+        {/* Reviews Grid/Carousel */}
+        {isDesktop ? (
+          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {reviews.map((review) => (
+              <StaggerItem key={review.id}>
+                {renderReviewCard(review)}
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        ) : (
+          <Carousel
+            config={carouselConfig}
+            ariaLabel="Patient reviews carousel"
+            className="mb-8"
+          >
+            {reviews.map((review) => (
+              <div key={review.id}>
+                {renderReviewCard(review)}
+              </div>
+            ))}
+          </Carousel>
+        )}
 
         {/* Leave a Review CTA */}
         <div className="mt-12 text-center">

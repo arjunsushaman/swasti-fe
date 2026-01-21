@@ -87,3 +87,24 @@ export interface NavItem {
   href: string;
   children?: NavItem[];
 }
+
+// Carousel
+export interface CarouselConfig {
+  itemsPerView: {
+    mobile: number;
+    tablet: number;
+    desktop: number;
+  };
+  gap: number;
+  dragEnabled: boolean;
+  showDots: boolean;
+  showArrows: boolean;
+  loop: boolean;
+}
+
+export interface CarouselState {
+  currentIndex: number;
+  totalItems: number;
+  itemsPerView: number;
+  isDragging: boolean;
+}
