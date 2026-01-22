@@ -32,10 +32,10 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
   };
 
   // Render doctor card function
-  const renderDoctorCard = (doctor: Doctor) => (
+  const renderDoctorCard = (doctor: Doctor, forCarousel: boolean = false) => (
     <motion.div whileHover={hoverLift} className="glass-card p-6 h-full hover:border-primary-300 transition-colors">
       <div className="flex flex-col sm:flex-row gap-4">
-        <div className="w-24 h-24 flex-shrink-0 mx-auto sm:mx-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-xl flex items-center justify-center text-4xl shadow-inner border border-white overflow-hidden">
+        <div className={`${forCarousel ? 'w-32 h-32' : 'w-24 h-24'} flex-shrink-0 mx-auto sm:mx-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-xl flex items-center justify-center ${forCarousel ? 'text-5xl' : 'text-4xl'} shadow-inner border border-white overflow-hidden`}>
           {doctor.imageUrl ? (
             <img src={doctor.imageUrl} alt={doctor.name} className="w-full h-full object-cover" />
           ) : (
@@ -74,7 +74,7 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {displayDoctors.map((doctor) => (
               <StaggerItem key={doctor.name}>
-                {renderDoctorCard(doctor)}
+                {renderDoctorCard(doctor, false)}
               </StaggerItem>
             ))}
           </StaggerContainer>
@@ -86,7 +86,7 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
           >
             {displayDoctors.map((doctor) => (
               <div key={doctor.name}>
-                {renderDoctorCard(doctor)}
+                {renderDoctorCard(doctor, true)}
               </div>
             ))}
           </Carousel>

@@ -48,14 +48,23 @@ export default function Carousel({
     return <>{children}</>;
   }
 
-  // Calculate item width percentage
-  const itemWidth = `${100 / carousel.itemsPerView}%`;
+  // Calculate item width percentage (accounting for gaps)
+  const itemWidth = `calc(${100 / carousel.itemsPerView}% - ${
+    (config.gap * (carousel.itemsPerView - 1)) / carousel.itemsPerView
+  }px)`;
 
   // Calculate total pages for dots
   const totalPages = getTotalPages(totalItems, carousel.itemsPerView);
 
   // Calculate current page for dots
   const currentPage = Math.floor(carousel.currentIndex / carousel.itemsPerView);
+
+  // Calculate transform considering gaps
+  const calculateTransform = () => {
+    const baseTransform = -carousel.currentIndex * (100 / carousel.itemsPerView);
+    const gapOffset = -carousel.currentIndex * config.gap;
+    return `calc(${baseTransform}% + ${gapOffset}px)`;
+  };
 
   return (
     <div
@@ -65,17 +74,17 @@ export default function Carousel({
       aria-live="polite"
     >
       {/* Carousel Track */}
-      <div className="overflow-hidden">
+      <div className="overflow-hidden -mx-4 px-4">
         <motion.div
           className="flex"
           style={{ gap: `${config.gap}px` }}
           drag={config.dragEnabled && !prefersReducedMotion ? 'x' : false}
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.1}
-          dragMomentum={false}
+          dragConstraints={{ left: -50, right: 50 }}
+          dragElastic={0.2}
+          dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
           onDragEnd={carousel.handleDragEnd}
           animate={{
-            x: `${-carousel.currentIndex * (100 / carousel.itemsPerView)}%`,
+            x: calculateTransform(),
           }}
           transition={{
             type: 'spring',
@@ -103,6 +112,41 @@ export default function Carousel({
           ))}
         </motion.div>
       </div>
+
+      {/* Swipe Hint */}
+      {totalPages > 1 && (
+        <div className="text-center mt-4 mb-2">
+          <p className="text-sm text-secondary-500 flex items-center justify-center gap-2">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M7 16l-4-4m0 0l4-4m-4 4h18"
+              />
+            </svg>
+            <span>Swipe to view more</span>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </p>
+        </div>
+      )}
 
       {/* Dots Navigation */}
       {config.showDots && totalPages > 1 && (
