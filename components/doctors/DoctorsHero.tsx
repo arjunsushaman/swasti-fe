@@ -44,7 +44,7 @@ export default function DoctorsHero({ generalPractitioner }: DoctorsHeroProps) {
             <DoctorCard
               name={generalPractitioner.name}
               qualifications={generalPractitioner.qualifications}
-              specialty={generalPractitioner.specialtyLabel}
+              speciality={generalPractitioner.specialtyLabel}
               availability={generalPractitioner.availability}
               imageUrl={generalPractitioner.imageUrl}
               bio={generalPractitioner.bio}

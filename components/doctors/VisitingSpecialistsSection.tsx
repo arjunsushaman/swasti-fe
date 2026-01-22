@@ -33,7 +33,7 @@ export default function VisitingSpecialistsSection({ specialists }: VisitingSpec
               <DoctorCard
                 name={doctor.name}
                 qualifications={doctor.qualifications}
-                specialty={doctor.specialtyLabel}
+                speciality={doctor.specialtyLabel}
                 availability={doctor.availability}
                 imageUrl={doctor.imageUrl}
                 bio={doctor.bio}

@@ -38,7 +38,7 @@ export const VALUE_BOXES = [
   },
   {
     icon: '🧠',
-    title: 'Expert-Led Specialty Services',
+    title: 'Expert-Led Speciality Services',
     description:
       'From neurology to orthopaedics, our visiting specialists bring advanced expertise right to your neighborhood.',
   },
@@ -61,7 +61,7 @@ export const DOCTORS_DATA = [
   {
     name: 'Dr. Anoop Sugunan',
     qualifications: 'MBBS, MD, DrNB (Neurology)',
-    specialty: 'neurology' as const,
+    speciality: 'neurology' as const,
     specialtyLabel: 'Neurology',
     availability: 'Consultation available on scheduled days',
     featured: true,
@@ -71,7 +71,7 @@ export const DOCTORS_DATA = [
   {
     name: 'Dr. Rahul L S',
     qualifications: 'MBBS, DNB – Consultant Orthopaedic Surgeon',
-    specialty: 'orthopaedics' as const,
+    speciality: 'orthopaedics' as const,
     specialtyLabel: 'Orthopaedics',
     availability: 'Consultation on scheduled days',
     featured: true,
@@ -81,7 +81,7 @@ export const DOCTORS_DATA = [
   {
     name: 'Dr. Akhilesh Arjun',
     qualifications: 'MBBS, MS (Orthopaedics), FIEORA, FRIC',
-    specialty: 'orthopaedics' as const,
+    speciality: 'orthopaedics' as const,
     specialtyLabel: 'Orthopaedics',
     availability: 'Consultation on scheduled days',
     featured: true,
@@ -91,7 +91,7 @@ export const DOCTORS_DATA = [
   {
     name: 'Dr. K P Asokan Pillai',
     qualifications: 'MBBS, DCH',
-    specialty: 'paediatrics' as const,
+    speciality: 'paediatrics' as const,
     specialtyLabel: 'Paediatrics',
     availability: 'Consultation on scheduled days',
     featured: true,
@@ -101,7 +101,7 @@ export const DOCTORS_DATA = [
   {
     name: 'Dr. Sajith S L',
     qualifications: 'MBBS, MD (Respiratory Medicine)',
-    specialty: 'pulmonology' as const,
+    speciality: 'pulmonology' as const,
     specialtyLabel: 'Pulmonology',
     availability: 'Senior Consultant Pulmonologist (Allergy, Asthma & Sleep Medicine)',
     featured: true,
@@ -111,7 +111,7 @@ export const DOCTORS_DATA = [
   {
     name: 'Dr. Vishnu S Kumar',
     qualifications: 'MBBS – General Practitioner',
-    specialty: 'general-practice' as const,
+    speciality: 'general-practice' as const,
     specialtyLabel: 'General Practice / Family Medicine',
     availability: 'Available all days: 9:00 AM – 9:00 PM',
     featured: true,

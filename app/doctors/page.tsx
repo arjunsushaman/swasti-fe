@@ -7,8 +7,8 @@ import { DOCTORS_DATA } from '@/lib/content';
 export default function DoctorsPage() {
   const doctors = DOCTORS_DATA;
 
-  const generalPractitioner = doctors.find((d) => d.specialty === 'general-practice');
-  const specialists = doctors.filter((d) => d.specialty !== 'general-practice');
+  const generalPractitioner = doctors.find((d) => d.speciality === 'general-practice');
+  const specialists = doctors.filter((d) => d.speciality !== 'general-practice');
 
   return (
     <main className="overflow-hidden">

@@ -7,7 +7,7 @@ import { hoverLift } from '@/lib/animations';
 interface DoctorCardProps {
   name: string;
   qualifications: string;
-  specialty: string;
+  speciality: string;
   availability: string;
   imageUrl?: string;
   bio?: string;
@@ -16,7 +16,7 @@ interface DoctorCardProps {
 export default function DoctorCard({
   name,
   qualifications,
-  specialty,
+  speciality,
   availability,
   imageUrl,
   bio,
@@ -65,7 +65,7 @@ export default function DoctorCard({
         <div className="flex-1 text-center sm:text-left">
           <h3 className="text-xl font-semibold text-secondary-900">{name}</h3>
           <p className="text-primary-600 font-medium mt-1">{qualifications}</p>
-          <p className="text-secondary-600 mt-1">{specialty}</p>
+          <p className="text-secondary-600 mt-1">{speciality}</p>
           {bio && <p className="text-secondary-500 mt-3 text-sm">{bio}</p>}
           <div className="mt-4 flex items-center justify-center sm:justify-start gap-2 text-sm text-secondary-500">
             <svg

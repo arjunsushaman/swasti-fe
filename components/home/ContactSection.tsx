@@ -60,7 +60,7 @@ export default function ContactSection() {
                     >
                       {CONTACT_INFO.phone}
                     </a>
-                    <p className="text-secondary-500 mt-1">Call us for appointments and inquiries</p>
+                    <p className="text-secondary-500 mt-1">Call us for appointments and enquiries</p>
                   </div>
                 </div>
               </motion.div>

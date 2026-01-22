@@ -24,7 +24,7 @@ export default function Footer() {
             <h3 className="text-xl font-bold text-white">{SITE_NAME}</h3>
             <p className="text-sm leading-relaxed">
               Clarity. Compassion. Care that continues. At Swasti Lifecare, we bring quality
-              healthcare closer to you with family medicine, specialty care, diagnostics, and home
+              healthcare closer to you with family medicine, speciality care, diagnostics, and home
               care services.
             </p>
             <div className="flex gap-3">
@@ -98,7 +98,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/#services" className="text-sm hover:text-primary-400 transition-colors">
-                  Specialty Consultations
+                  Speciality Consultations
                 </Link>
               </li>
               <li>

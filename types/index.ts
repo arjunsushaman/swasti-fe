@@ -22,7 +22,7 @@ export interface Box {
 }
 
 // Service Types
-export type ServiceType = 'general' | 'specialty' | 'lab' | 'neuro-lab' | 'physio' | 'home-care';
+export type ServiceType = 'general' | 'speciality' | 'lab' | 'neuro-lab' | 'physio' | 'home-care';
 
 export interface Service {
   id: number;
@@ -48,7 +48,7 @@ export interface Doctor {
   id?: number;
   name: string;
   qualifications: string;
-  specialty: DoctorSpecialty;
+  speciality: DoctorSpecialty;
   specialtyLabel: string;
   bio?: string;
   availability: string;

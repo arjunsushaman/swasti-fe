@@ -33,7 +33,7 @@ export default function ConsultationScheduleSection({ specialists }: Consultatio
                       Specialist
                     </th>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-secondary-900">
-                      Specialty
+                      Speciality
                     </th>
                     <th className="px-6 py-4 text-left text-sm font-semibold text-secondary-900">
                       Availability
@@ -63,7 +63,7 @@ export default function ConsultationScheduleSection({ specialists }: Consultatio
         {/* Call to Action */}
         <AnimatedDiv delay={0.4} className="text-center mt-12">
           <p className="text-secondary-600 mb-6">
-            For appointments and inquiries, contact us
+            For appointments and enquiries, contact us
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/booking" className="btn-primary">
