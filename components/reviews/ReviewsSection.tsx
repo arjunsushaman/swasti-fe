@@ -33,7 +33,11 @@ export default function ReviewsSection() {
 
   // Render review card function
   const renderReviewCard = (review: typeof reviews[0]) => (
-    <motion.div whileHover={hoverLift} className="h-full">
+    <motion.div
+      whileHover={hoverLift}
+      className="h-full"
+      style={{ pointerEvents: 'auto', touchAction: 'pan-y' }}
+    >
       <ReviewCard
         reviewerName={review.reviewerName}
         rating={review.rating}

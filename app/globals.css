@@ -117,6 +117,24 @@
   .animate-delay-4000 {
     animation-delay: 4s;
   }
+
+  /* Touch-action utilities for carousel */
+  .touch-pan-y {
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .touch-none {
+    touch-action: none;
+  }
+}
+
+/* iOS Safari and mobile touch optimization */
+@supports (-webkit-touch-callout: none) {
+  /* Fix for iOS touch event handling */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 /* Reduced motion preference for accessibility */

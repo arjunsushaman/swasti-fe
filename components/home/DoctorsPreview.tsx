@@ -33,11 +33,15 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
 
   // Render doctor card function
   const renderDoctorCard = (doctor: Doctor, forCarousel: boolean = false) => (
-    <motion.div whileHover={hoverLift} className="glass-card p-6 h-full hover:border-primary-300 transition-colors">
-      <div className="flex flex-col sm:flex-row gap-4">
+    <motion.div
+      whileHover={hoverLift}
+      className="glass-card p-6 h-full hover:border-primary-300 transition-colors"
+      style={{ pointerEvents: 'auto' }}
+    >
+      <div className="flex flex-col sm:flex-row gap-4" style={{ touchAction: 'pan-y' }}>
         <div className={`${forCarousel ? 'w-32 h-32' : 'w-24 h-24'} flex-shrink-0 mx-auto sm:mx-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-xl flex items-center justify-center ${forCarousel ? 'text-5xl' : 'text-4xl'} shadow-inner border border-white overflow-hidden`}>
           {doctor.imageUrl ? (
-            <img src={doctor.imageUrl} alt={doctor.name} className="w-full h-full object-cover" />
+            <img src={doctor.imageUrl} alt={doctor.name} className="w-full h-full object-cover pointer-events-none" />
           ) : (
             '👨‍⚕️'
           )}

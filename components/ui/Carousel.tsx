@@ -74,14 +74,20 @@ export default function Carousel({
       aria-live="polite"
     >
       {/* Carousel Track */}
-      <div className="overflow-hidden -mx-4 px-4">
+      <div className="overflow-hidden -mx-4 px-4 touch-pan-y">
         <motion.div
-          className="flex"
-          style={{ gap: `${config.gap}px` }}
+          className="flex select-none"
+          style={{
+            gap: `${config.gap}px`,
+            touchAction: 'pan-y',
+            WebkitUserSelect: 'none',
+            userSelect: 'none'
+          }}
           drag={config.dragEnabled && !prefersReducedMotion ? 'x' : false}
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.3}
           dragMomentum={false}
+          dragDirectionLock={true}
           onDragEnd={carousel.handleDragEnd}
           animate={{
             x: calculateTransform(),
@@ -97,7 +103,11 @@ export default function Carousel({
             <div
               key={index}
               className="flex-shrink-0"
-              style={{ width: itemWidth }}
+              style={{
+                width: itemWidth,
+                touchAction: 'pan-y',
+                pointerEvents: 'auto'
+              }}
               aria-hidden={
                 index < carousel.currentIndex ||
                 index >= carousel.currentIndex + carousel.itemsPerView
