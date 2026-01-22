@@ -206,12 +206,12 @@ export default function Footer() {
               &copy; {currentYear} {SITE_NAME}. All rights reserved.
             </p>
             <div className="flex gap-6 text-sm">
-              <Link href="/contact" className="hover:text-primary-400 transition-colors">
+              <span className="text-secondary-400">
                 Privacy Policy
-              </Link>
-              <Link href="/contact" className="hover:text-primary-400 transition-colors">
+              </span>
+              <span className="text-secondary-400">
                 Terms of Service
-              </Link>
+              </span>
             </div>
           </div>
         </div>

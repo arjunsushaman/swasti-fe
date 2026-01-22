@@ -8,7 +8,10 @@ export default function WhyChooseUs() {
     <AnimatedSection className="py-24 bg-gradient-to-br from-primary-50 to-accent-50">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="section-heading">Why Choose Swasti Home Care?</h2>
+          <h2 className="text-[1.5rem] sm:text-3xl md:text-5xl font-bold text-secondary-900 mb-6 leading-tight">
+            <span className="block whitespace-nowrap">Why Choose Swasti</span>
+            <span className="text-gradient whitespace-nowrap">Home Care?</span>
+          </h2>
         </div>
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

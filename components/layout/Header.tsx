@@ -11,12 +11,62 @@ import { useMotionPreferences } from '@/lib/hooks/useMotionPreferences';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>('');
   const { prefersReducedMotion, isMobile } = useMotionPreferences();
   const threshold = isMobile ? 30 : 50;
   const isScrolled = useScrollListener(threshold);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
   const headerRef = useRef<HTMLDivElement>(null);
+
+  // Track active section based on scroll position for hash links
+  useEffect(() => {
+    if (pathname !== '/') {
+      setActiveSection('');
+      return;
+    }
+
+    // Check initial hash on page load
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      setActiveSection(hash);
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' }
+    );
+
+    // Observe sections
+    const sections = ['services', 'contact'];
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    // Listen for hash changes
+    const handleHashChange = () => {
+      const newHash = window.location.hash.replace('#', '');
+      if (newHash) {
+        setActiveSection(newHash);
+      } else {
+        setActiveSection('');
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, [pathname]);
 
   // Close menu when clicking outside or pressing Escape
   useEffect(() => {
@@ -85,7 +135,11 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <Navigation isTransparent={isHomePage && !isScrolled && !mobileMenuOpen} />
+          <Navigation
+            isTransparent={isHomePage && !isScrolled && !mobileMenuOpen}
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+          />
 
           {/* CTA Button - Desktop */}
           <div className="hidden lg:block">
@@ -181,7 +235,13 @@ export default function Header() {
               className="lg:hidden overflow-hidden bg-white/98 backdrop-blur-md"
             >
               <div className="py-6 px-2 border-t border-primary-100/50 bg-gradient-to-b from-white via-primary-50/20 to-primary-50/40 rounded-b-2xl shadow-lg">
-                <Navigation mobile onNavigate={() => setMobileMenuOpen(false)} isTransparent={false} />
+                <Navigation
+                  mobile
+                  onNavigate={() => setMobileMenuOpen(false)}
+                  isTransparent={false}
+                  activeSection={activeSection}
+                  setActiveSection={setActiveSection}
+                />
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}

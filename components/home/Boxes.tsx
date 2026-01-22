@@ -27,9 +27,9 @@ function Box({ icon, title, description, index }: BoxProps) {
   return (
     <motion.div
       whileHover={prefersReducedMotion ? undefined : hoverLift}
-      className="glass-card p-8 rounded-2xl h-full border border-white/60 bg-white/40 hover:bg-white/80 transition-all duration-300"
+      className="glass-card p-8 lg:p-6 rounded-2xl h-full border border-white/60 bg-white/40 hover:bg-white/80 transition-all duration-300"
     >
-      <div className="flex items-center gap-4 mb-4">
+      <div className="flex items-center lg:flex-col gap-4 lg:gap-3 mb-4 lg:text-center">
         <motion.div
           className={`w-16 h-16 flex-shrink-0 rounded-2xl bg-gradient-to-br ${gradientClass} flex items-center justify-center text-3xl shadow-sm`}
           role="img"
@@ -39,11 +39,11 @@ function Box({ icon, title, description, index }: BoxProps) {
         >
           {icon}
         </motion.div>
-        <h3 className="text-xl font-bold text-secondary-900 hover:text-primary-600 transition-colors">
+        <h3 className="text-xl lg:text-lg font-bold text-secondary-900 hover:text-primary-600 transition-colors lg:leading-tight">
           {title}
         </h3>
       </div>
-      <p className="text-secondary-600 leading-relaxed font-medium">{description}</p>
+      <p className="text-secondary-600 leading-relaxed font-medium lg:text-center lg:text-sm">{description}</p>
     </motion.div>
   );
 }
@@ -66,7 +66,10 @@ export default function Boxes() {
           >
             Our Values
           </motion.div>
-          <h2 className="text-3xl md:text-5xl font-bold text-secondary-900 mb-6">Why Choose Swasti?</h2>
+          <h2 className="text-[1.5rem] sm:text-3xl md:text-5xl font-bold text-secondary-900 mb-6 leading-tight">
+            <span className="block whitespace-nowrap">Why Choose</span>
+            <span className="text-gradient whitespace-nowrap">Swasti?</span>
+          </h2>
           <p className="section-subheading max-w-2xl mx-auto text-lg text-secondary-600">
             We are not just a clinic, we are a growing healthcare ecosystem designed around your needs.
           </p>

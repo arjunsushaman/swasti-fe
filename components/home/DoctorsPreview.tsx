@@ -1,10 +1,11 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { AnimatedSection, AnimatedDiv, StaggerContainer, StaggerItem } from '@/components/ui/Motion';
 import { hoverLift } from '@/lib/animations';
-import { useBreakpoint } from '@/lib/hooks/useBreakpoint';
 import Carousel from '@/components/ui/Carousel';
 import type { Doctor, CarouselConfig } from '@/types';
 
@@ -19,11 +20,25 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
   // If no featured doctors, show first 6
   const displayDoctors = featuredDoctors.length > 0 ? featuredDoctors : doctors.slice(0, 6);
 
-  const { isDesktop } = useBreakpoint();
+  const [showGrid, setShowGrid] = useState(true);
+  const [screenWidth, setScreenWidth] = useState(1300);
 
-  // Carousel configuration
+  // Check if screen is >= 1300px for grid layout
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+      setShowGrid(width >= 1300);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Carousel configuration - 2 items for 1024-1299px range
   const carouselConfig: CarouselConfig = {
-    itemsPerView: { mobile: 1, tablet: 2, desktop: 3 },
+    itemsPerView: { mobile: 1, tablet: 2, desktop: screenWidth >= 1024 && screenWidth < 1300 ? 2 : 3 },
     gap: 32, // Match Tailwind gap-8 (8 * 4px = 32px)
     dragEnabled: true,
     showDots: true,
@@ -35,23 +50,68 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
   const renderDoctorCard = (doctor: Doctor, forCarousel: boolean = false) => (
     <motion.div
       whileHover={hoverLift}
-      className="glass-card p-6 h-full hover:border-primary-300 transition-colors"
+      className={`glass-card p-6 hover:border-primary-300 transition-colors ${forCarousel ? 'h-full min-h-[280px]' : 'h-full'}`}
       style={{ pointerEvents: 'auto' }}
     >
-      <div className="flex flex-col sm:flex-row gap-4" style={{ touchAction: 'pan-y' }}>
-        <div className={`${forCarousel ? 'w-32 h-32' : 'w-24 h-24'} flex-shrink-0 mx-auto sm:mx-0 bg-gradient-to-br from-primary-100 to-primary-50 rounded-xl flex items-center justify-center ${forCarousel ? 'text-5xl' : 'text-4xl'} shadow-inner border border-white overflow-hidden`}>
-          {doctor.imageUrl ? (
-            <img src={doctor.imageUrl} alt={doctor.name} className="w-full h-full object-cover pointer-events-none" />
-          ) : (
-            '👨‍⚕️'
-          )}
+      <div className="flex flex-col sm:flex-row gap-6 h-full" style={{ touchAction: 'pan-y' }}>
+        {/* Image */}
+        <div className="flex-shrink-0">
+          <div className="w-32 h-32 mx-auto sm:mx-0 bg-primary-100 rounded-xl overflow-hidden">
+            {doctor.imageUrl ? (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src={doctor.imageUrl}
+                  alt={doctor.name}
+                  width={128}
+                  height={128}
+                  className="w-full h-full object-cover"
+                  style={{ objectPosition: 'center' }}
+                />
+              </motion.div>
+            ) : (
+              <div className="w-full h-full flex items-center justify-center">
+                <svg
+                  className="w-16 h-16 text-primary-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                  />
+                </svg>
+              </div>
+            )}
+          </div>
         </div>
-        <div className="flex-1 text-center sm:text-left">
-          <h3 className="text-xl font-bold text-secondary-900 mb-2">{doctor.name}</h3>
-          <p className="text-primary-600 font-medium mb-1 text-sm tracking-wide">{doctor.qualifications}</p>
-          <p className="text-secondary-600 mb-3 font-medium">{doctor.specialtyLabel}</p>
-          <div className="inline-block px-3 py-1 bg-secondary-100 text-secondary-600 text-xs rounded-full">
-            {doctor.availability}
+
+        {/* Info */}
+        <div className="flex-1 text-center sm:text-left flex flex-col">
+          <h3 className="text-xl font-semibold text-secondary-900">{doctor.name}</h3>
+          <p className="text-primary-600 font-medium mt-1 min-h-[4.5rem]">{doctor.qualifications}</p>
+          <p className="text-secondary-600 mt-1">{doctor.specialtyLabel}</p>
+          <div className="mt-4 flex items-center justify-center sm:justify-start gap-2 text-sm text-secondary-500">
+            <svg
+              className="w-4 h-4 flex-shrink-0 text-primary-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span className="line-clamp-2">{doctor.availability}</span>
           </div>
         </div>
       </div>
@@ -74,7 +134,7 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
           </p>
         </div>
 
-        {isDesktop ? (
+        {showGrid ? (
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
             {displayDoctors.map((doctor) => (
               <StaggerItem key={doctor.name}>
@@ -87,6 +147,7 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
             config={carouselConfig}
             ariaLabel="Featured doctors carousel"
             className="mb-12"
+            forceCarousel={true}
           >
             {displayDoctors.map((doctor) => (
               <div key={doctor.name}>

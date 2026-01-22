@@ -24,7 +24,35 @@ export default function ConsultationScheduleSection({ specialists }: Consultatio
         </AnimatedDiv>
 
         <div className="max-w-4xl mx-auto">
-          <div className="glass-card overflow-hidden">
+          {/* Mobile Card Layout */}
+          <div className="md:hidden space-y-4">
+            {specialists.map((doctor) => (
+              <motion.div
+                key={doctor.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="glass-card p-4 hover:shadow-lg transition-shadow"
+              >
+                <h3 className="text-lg font-semibold text-secondary-900 mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
+                  {doctor.name}
+                </h3>
+                <div className="space-y-2">
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm font-medium text-secondary-500 min-w-[80px]">Speciality:</span>
+                    <span className="text-sm text-secondary-700">{doctor.specialtyLabel}</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <span className="text-sm font-medium text-secondary-500 min-w-[80px]">Available:</span>
+                    <span className="text-sm text-secondary-700">{doctor.availability}</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Desktop Table Layout */}
+          <div className="hidden md:block glass-card overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-primary-50">
@@ -43,7 +71,7 @@ export default function ConsultationScheduleSection({ specialists }: Consultatio
                 <tbody className="divide-y divide-secondary-100">
                   {specialists.map((doctor) => (
                     <tr key={doctor.name} className="hover:bg-primary-50/30 transition-colors">
-                      <td className="px-6 py-4 text-secondary-900 font-medium">
+                      <td className="px-6 py-4 text-secondary-900 font-medium whitespace-nowrap">
                         {doctor.name}
                       </td>
                       <td className="px-6 py-4 text-secondary-600">
@@ -59,26 +87,6 @@ export default function ConsultationScheduleSection({ specialists }: Consultatio
             </div>
           </div>
         </div>
-
-        {/* Call to Action */}
-        <AnimatedDiv delay={0.4} className="text-center mt-12">
-          <p className="text-secondary-600 mb-6">
-            For appointments and enquiries, contact us
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/booking" className="btn-primary">
-              Book Appointment
-            </Link>
-            <a
-              href={CONTACT_INFO.whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-            >
-              WhatsApp Us
-            </a>
-          </div>
-        </AnimatedDiv>
       </div>
     </AnimatedSection>
   );

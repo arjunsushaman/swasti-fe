@@ -63,7 +63,7 @@ export const DOCTORS_DATA = [
     qualifications: 'MBBS, MD, DrNB (Neurology)',
     speciality: 'neurology' as const,
     specialtyLabel: 'Neurology',
-    availability: 'Consultation available on scheduled days',
+    availability: 'Consultation on scheduled days',
     featured: true,
     order: 1,
     imageUrl: '/images/doctors/dr-anoop-sugunan.jpg',

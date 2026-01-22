@@ -163,8 +163,9 @@ export default function ServicesSection() {
           >
             🩺 Our Services
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold text-secondary-900 mb-6 tracking-tight">
-            Comprehensive Healthcare <br /><span className="text-gradient">Under One Roof</span>
+          <h2 className="text-[1.625rem] sm:text-4xl md:text-5xl font-bold text-secondary-900 mb-6 tracking-tight">
+            <span className="whitespace-nowrap">Comprehensive Healthcare</span> <br />
+            <span className="text-gradient whitespace-nowrap">Under One Roof</span>
           </h2>
           <p className="text-lg text-secondary-600 leading-relaxed text-balance">
             We provide a holistic approach to your health with a wide range of specialized services.
@@ -189,36 +190,37 @@ export default function ServicesSection() {
                   {/* Min height container for top section to ensure alignment when collapsed */}
                   <div className="relative">
                     {/* Gradient Header */}
-                    <div className={`absolute top-0 left-0 w-full h-32 bg-gradient-to-br ${service.gradient} opacity-50 transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'group-hover:opacity-100'}`} />
+                    <div className={`absolute top-0 left-0 w-full h-24 max-[500px]:h-auto md:h-24 bg-gradient-to-br ${service.gradient} opacity-50 transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'group-hover:opacity-100'}`} />
 
-                    <div className="relative z-10 p-8">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className="flex items-center gap-4 flex-1">
+                    {/* Header Content - Icon and Title */}
+                    <div className="relative z-10 p-4 md:p-5">
+                      <div className="flex items-start justify-between">
+                        <div className="flex items-start gap-2.5 md:gap-3 flex-1">
                           {/* Icon */}
-                          <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-secondary-100 flex items-center justify-center text-4xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
+                          <div className="w-11 h-11 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-2xl bg-white shadow-sm border border-secondary-100 flex items-center justify-center text-2xl md:text-3xl group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                             {getIcon(service.emoji)}
                           </div>
 
                           {/* Title */}
-                          <h3 className="text-2xl font-bold text-secondary-900 group-hover:text-primary-700 transition-colors">
+                          <h3 className="text-[0.95rem] sm:text-base md:text-lg lg:text-xl font-bold text-secondary-900 group-hover:text-primary-700 transition-colors leading-tight">
                             {service.title}
                           </h3>
                         </div>
 
                         {/* Chevron */}
-                        <div className={`w-8 h-8 rounded-full bg-white/50 border border-secondary-200 flex items-center justify-center text-secondary-500 transition-transform duration-300 flex-shrink-0 ${isExpanded ? 'rotate-180 bg-primary-50 text-primary-600 border-primary-200' : ''}`}>
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div className={`w-7 h-7 md:w-8 md:h-8 rounded-full bg-white/50 border border-secondary-200 flex items-center justify-center text-secondary-500 transition-transform duration-300 flex-shrink-0 ml-2 ${isExpanded ? 'rotate-180 bg-primary-50 text-primary-600 border-primary-200' : ''}`}>
+                          <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                           </svg>
                         </div>
                       </div>
+                    </div>
 
-                      {/* Description */}
-                      <div>
-                        <p className="text-secondary-600 leading-relaxed font-medium">
-                          {service.description}
-                        </p>
-                      </div>
+                    {/* Description - Below gradient background */}
+                    <div className="relative z-10 px-4 md:px-5 pb-4 md:pb-5">
+                      <p className="text-secondary-600 leading-relaxed font-medium text-sm md:text-base">
+                        {service.description}
+                      </p>
                     </div>
                   </div>
 

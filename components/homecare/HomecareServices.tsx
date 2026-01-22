@@ -14,7 +14,10 @@ export default function HomecareServices() {
     <AnimatedSection className="py-24 bg-white">
       <div className="container-custom">
         <AnimatedDiv className="text-center mb-16">
-          <h2 className="section-heading">Our Home Care Services</h2>
+          <h2 className="text-[1.5rem] sm:text-3xl md:text-5xl font-bold text-secondary-900 mb-6 leading-tight">
+            <span className="block whitespace-nowrap">Our Home Care</span>
+            <span className="text-gradient whitespace-nowrap">Services</span>
+          </h2>
           <p className="section-subheading max-w-3xl mx-auto">
             Comprehensive medical care delivered to your doorstep with compassion and expertise
           </p>

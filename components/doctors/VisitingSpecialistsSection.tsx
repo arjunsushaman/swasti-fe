@@ -27,9 +27,9 @@ export default function VisitingSpecialistsSection({ specialists }: VisitingSpec
           </p>
         </div>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {specialists.map((doctor) => (
-            <StaggerItem key={doctor.name}>
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-8 md:justify-items-center">
+          {specialists.map((doctor, index) => (
+            <StaggerItem key={doctor.name} className={`w-full ${specialists.length % 2 !== 0 && index === specialists.length - 1 ? 'md:col-span-2 md:max-w-2xl md:mx-auto' : ''}`}>
               <DoctorCard
                 name={doctor.name}
                 qualifications={doctor.qualifications}

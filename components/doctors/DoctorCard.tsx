@@ -64,12 +64,12 @@ export default function DoctorCard({
         {/* Info */}
         <div className="flex-1 text-center sm:text-left">
           <h3 className="text-xl font-semibold text-secondary-900">{name}</h3>
-          <p className="text-primary-600 font-medium mt-1">{qualifications}</p>
+          <p className="text-primary-600 font-medium mt-1 min-h-[4.5rem]">{qualifications}</p>
           <p className="text-secondary-600 mt-1">{speciality}</p>
           {bio && <p className="text-secondary-500 mt-3 text-sm">{bio}</p>}
           <div className="mt-4 flex items-center justify-center sm:justify-start gap-2 text-sm text-secondary-500">
             <svg
-              className="w-4 h-4 text-primary-500"
+              className="w-4 h-4 flex-shrink-0 text-primary-500"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -81,7 +81,7 @@ export default function DoctorCard({
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            {availability}
+            <span className="line-clamp-2">{availability}</span>
           </div>
         </div>
       </div>

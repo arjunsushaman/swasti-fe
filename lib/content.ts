@@ -187,22 +187,22 @@ export const HOMECARE_CONTENT = {
 
   whyChooseUs: [
     {
-      icon: '✅',
+      icon: '👨‍⚕️',
       title: 'Qualified Professionals',
       description: 'Experienced doctors, nurses, and physiotherapists',
     },
     {
-      icon: '🤝',
+      icon: '⭐',
       title: 'Ethical & Transparent',
       description: 'Clear communication and honest medical guidance',
     },
     {
-      icon: '💙',
+      icon: '❤️',
       title: 'Compassionate Care',
       description: 'Patient-centered approach with empathy and respect',
     },
     {
-      icon: '🏡',
+      icon: '🏠',
       title: 'Comfort & Convenience',
       description: 'Reduces travel stress for elderly patients',
     },

@@ -11,9 +11,17 @@ interface NavigationProps {
   mobile?: boolean;
   onNavigate?: () => void;
   isTransparent?: boolean;
+  activeSection: string;
+  setActiveSection: (section: string) => void;
 }
 
-export default function Navigation({ mobile = false, onNavigate, isTransparent = false }: NavigationProps) {
+export default function Navigation({
+  mobile = false,
+  onNavigate,
+  isTransparent = false,
+  activeSection,
+  setActiveSection,
+}: NavigationProps) {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -47,6 +55,9 @@ export default function Navigation({ mobile = false, onNavigate, isTransparent =
       e.preventDefault(); // Always prevent default for hash links
       const sectionId = href.replace('/#', '');
 
+      // Immediately set the active section
+      setActiveSection(sectionId);
+
       if (pathname === '/') {
         // Already on homepage, just scroll
         scrollToSection(sectionId);
@@ -56,13 +67,26 @@ export default function Navigation({ mobile = false, onNavigate, isTransparent =
         // Scroll after navigation completes
         setTimeout(() => scrollToSection(sectionId), 300);
       }
+    } else {
+      // For non-hash links, clear active section
+      setActiveSection('');
     }
 
     onNavigate?.();
   };
 
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
+    // Handle hash links (/#services, /#contact)
+    if (href.startsWith('/#')) {
+      const section = href.replace('/#', '');
+      return pathname === '/' && activeSection === section;
+    }
+
+    // Handle regular routes
+    if (href === '/') {
+      return pathname === '/' && !activeSection;
+    }
+
     return pathname.startsWith(href);
   };
 

@@ -22,8 +22,10 @@ export default function HomecareHero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left: Content */}
           <AnimatedDiv className="text-center lg:text-left">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-secondary-900 mb-6">
-              {hero.title}
+            <h1 className="text-[1.75rem] sm:text-4xl md:text-5xl lg:text-6xl font-bold text-secondary-900 mb-6 leading-tight">
+              <span className="block whitespace-nowrap">Compassionate</span>
+              <span className="block whitespace-nowrap">Medical Care</span>
+              <span className="text-gradient whitespace-nowrap">at Your Doorstep</span>
             </h1>
             <p className="text-lg md:text-xl text-secondary-600 mb-8 max-w-2xl mx-auto lg:mx-0">
               {hero.subtitle}

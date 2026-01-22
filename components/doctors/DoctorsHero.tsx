@@ -41,14 +41,16 @@ export default function DoctorsHero({ generalPractitioner }: DoctorsHeroProps) {
               </h2>
               <p className="text-secondary-600">Your primary care physician, available every day</p>
             </div>
-            <DoctorCard
-              name={generalPractitioner.name}
-              qualifications={generalPractitioner.qualifications}
-              speciality={generalPractitioner.specialtyLabel}
-              availability={generalPractitioner.availability}
-              imageUrl={generalPractitioner.imageUrl}
-              bio={generalPractitioner.bio}
-            />
+            <div className="max-w-2xl mx-auto">
+              <DoctorCard
+                name={generalPractitioner.name}
+                qualifications={generalPractitioner.qualifications}
+                speciality={generalPractitioner.specialtyLabel}
+                availability={generalPractitioner.availability}
+                imageUrl={generalPractitioner.imageUrl}
+                bio={generalPractitioner.bio}
+              />
+            </div>
           </div>
         )}
       </div>

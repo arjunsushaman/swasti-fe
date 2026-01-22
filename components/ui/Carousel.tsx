@@ -14,6 +14,7 @@ interface CarouselProps {
   config: CarouselConfig;
   className?: string;
   ariaLabel?: string;
+  forceCarousel?: boolean;
 }
 
 /**
@@ -37,14 +38,15 @@ export default function Carousel({
   config,
   className = '',
   ariaLabel = 'Carousel',
+  forceCarousel = false,
 }: CarouselProps) {
   const totalItems = children.length;
   const { prefersReducedMotion, isMobile } = useMotionPreferences();
   const { isDesktop } = useBreakpoint();
   const carousel = useCarousel(totalItems, config);
 
-  // Desktop: Return children as-is for grid layout
-  if (isDesktop) {
+  // Desktop: Return children as-is for grid layout (unless forced to show carousel)
+  if (isDesktop && !forceCarousel) {
     return <>{children}</>;
   }
 

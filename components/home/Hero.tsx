@@ -52,10 +52,10 @@ export default function Hero() {
             animate={!mounted || prefersReducedMotion ? undefined : "animate"}
             variants={fadeInUp}
             transition={!mounted || prefersReducedMotion ? { duration: 0 } : defaultTransition}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-secondary-900 mb-6 md:mb-8 text-balance"
+            className="text-[1.75rem] sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-secondary-900 mb-6 md:mb-8 leading-tight"
           >
-            <span className="block mb-2">Clarity. Compassion.</span>
-            <span className="text-gradient drop-shadow-sm">Care that continues.</span>
+            <span className="block whitespace-nowrap">Clarity. Compassion.</span>
+            <span className="text-gradient drop-shadow-sm whitespace-nowrap">Care that continues.</span>
           </motion.h1>
 
           {/* Sub Line */}

@@ -8,7 +8,9 @@ export default function HowItWorks() {
     <AnimatedSection className="py-24 bg-secondary-50">
       <div className="container-custom">
         <div className="text-center mb-16">
-          <h2 className="section-heading">How It Works</h2>
+          <h2 className="text-[1.5rem] sm:text-3xl md:text-5xl font-bold text-secondary-900 mb-6 leading-tight">
+            <span className="text-gradient whitespace-nowrap">How It Works</span>
+          </h2>
           <p className="section-subheading">Simple steps to access quality home care</p>
         </div>
 

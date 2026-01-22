@@ -8,7 +8,9 @@ export default function ServiceAreas() {
     <AnimatedSection className="py-24 bg-white">
       <div className="container-custom">
         <AnimatedDiv className="text-center mb-12">
-          <h2 className="section-heading">Service Areas</h2>
+          <h2 className="text-[1.5rem] sm:text-3xl md:text-5xl font-bold text-secondary-900 mb-6 leading-tight">
+            <span className="text-gradient whitespace-nowrap">Service Areas</span>
+          </h2>
           <p className="section-subheading">Home care available in the following locations</p>
         </AnimatedDiv>
 
