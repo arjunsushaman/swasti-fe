@@ -44,7 +44,7 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
         </div>
         <div className="flex-1 text-center sm:text-left">
           <h3 className="text-xl font-bold text-secondary-900 mb-2">{doctor.name}</h3>
-          <p className="text-primary-600 font-medium mb-1 text-sm uppercase tracking-wide">{doctor.qualifications}</p>
+          <p className="text-primary-600 font-medium mb-1 text-sm tracking-wide">{doctor.qualifications}</p>
           <p className="text-secondary-600 mb-3 font-medium">{doctor.specialtyLabel}</p>
           <div className="inline-block px-3 py-1 bg-secondary-100 text-secondary-600 text-xs rounded-full">
             {doctor.availability}

@@ -50,7 +50,7 @@ export default function HomecareHero() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src={hero.image}
-                  alt="Swasti Lifecare Home Care Services"
+                  alt="Swasti Home Care Services"
                   width={400}
                   height={533}
                   className="w-full h-auto object-cover max-h-[500px] lg:max-h-[600px]"
