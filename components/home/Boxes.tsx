@@ -68,7 +68,7 @@ export default function Boxes() {
           </motion.div>
           <h2 className="text-3xl md:text-5xl font-bold text-secondary-900 mb-6">Why Choose Swasti?</h2>
           <p className="section-subheading max-w-2xl mx-auto text-lg text-secondary-600">
-            We are not just a clinic we are a growing healthcare ecosystem designed around your needs.
+            We are not just a clinic, we are a growing healthcare ecosystem designed around your needs.
           </p>
         </div>
 

@@ -78,7 +78,7 @@ export default function Header() {
               width={140}
               height={66}
               className={`w-auto transition-all duration-300 group-hover:scale-105 ${
-                isHomePage && !isScrolled && !mobileMenuOpen ? 'h-10 lg:h-12' : 'h-9 lg:h-12'
+                isHomePage && !isScrolled && !mobileMenuOpen ? 'h-12 lg:h-14' : 'h-11 lg:h-12'
               }`}
               priority
             />
