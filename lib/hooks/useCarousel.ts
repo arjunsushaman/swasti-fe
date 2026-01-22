@@ -69,15 +69,18 @@ export function useCarousel(
   // Drag gesture handler with velocity detection
   const handleDragEnd = useCallback(
     (event: any, info: any) => {
-      const threshold = 50; // Minimum drag distance in pixels
+      const threshold = 30; // Minimum drag distance in pixels
       const offset = info.offset.x;
-      const velocity = Math.abs(info.velocity.x);
+      const velocity = info.velocity.x;
 
-      // Trigger navigation if drag exceeds threshold or has high velocity
-      if (Math.abs(offset) > threshold || velocity > 500) {
-        if (offset > 0) {
+      // Trigger navigation based on drag direction
+      // Use lower threshold (30px) or velocity (300px/s)
+      if (Math.abs(offset) > threshold || Math.abs(velocity) > 300) {
+        if (offset > 0 || velocity > 0) {
+          // Swiped right - go to previous
           previous();
         } else {
+          // Swiped left - go to next
           next();
         }
       }

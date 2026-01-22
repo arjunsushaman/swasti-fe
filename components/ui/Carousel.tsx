@@ -79,9 +79,9 @@ export default function Carousel({
           className="flex"
           style={{ gap: `${config.gap}px` }}
           drag={config.dragEnabled && !prefersReducedMotion ? 'x' : false}
-          dragConstraints={{ left: -50, right: 50 }}
-          dragElastic={0.2}
-          dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.3}
+          dragMomentum={false}
           onDragEnd={carousel.handleDragEnd}
           animate={{
             x: calculateTransform(),
