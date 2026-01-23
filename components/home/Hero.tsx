@@ -64,7 +64,7 @@ export default function Hero() {
             animate={!mounted || prefersReducedMotion ? undefined : "animate"}
             variants={fadeInUp}
             transition={!mounted || prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.2 }}
-            className="text-base md:text-lg text-secondary-600 mb-8 md:mb-10 leading-relaxed max-w-3xl mx-auto"
+            className="text-base md:text-lg text-secondary-600 mb-8 md:mb-10 leading-relaxed max-w-3xl mx-auto text-left md:text-center"
           >
             {SUB_LINE}
           </motion.p>

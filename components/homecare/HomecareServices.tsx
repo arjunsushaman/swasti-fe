@@ -18,7 +18,7 @@ export default function HomecareServices() {
             <span className="block whitespace-nowrap">Our Home Care</span>
             <span className="text-gradient whitespace-nowrap">Services</span>
           </h2>
-          <p className="section-subheading max-w-3xl mx-auto">
+          <p className="section-subheading max-w-3xl mx-auto text-left md:text-center">
             Comprehensive medical care delivered to your doorstep with compassion and expertise
           </p>
         </AnimatedDiv>
@@ -27,9 +27,8 @@ export default function HomecareServices() {
           {HOMECARE_CONTENT.services.map((service) => (
             <StaggerItem key={service.id}>
               <motion.div
-                className={`card cursor-pointer transition-all duration-300 bg-gradient-to-br ${service.gradient} border-2 ${
-                  expandedId === service.id ? 'border-primary-400 shadow-lg' : 'border-transparent'
-                }`}
+                className={`card cursor-pointer transition-all duration-300 bg-gradient-to-br ${service.gradient} border-2 ${expandedId === service.id ? 'border-primary-400 shadow-lg' : 'border-transparent'
+                  }`}
                 onClick={() => setExpandedId(expandedId === service.id ? null : service.id)}
                 whileHover={{ scale: prefersReducedMotion ? 1 : 1.02 }}
               >
@@ -39,7 +38,7 @@ export default function HomecareServices() {
                     <h3 className="text-xl font-semibold text-secondary-900 mb-2">
                       {service.title}
                     </h3>
-                    <p className="text-secondary-600 mb-3">{service.description}</p>
+                    <p className="text-secondary-600 mb-3 text-left md:text-center">{service.description}</p>
 
                     <AnimatePresence>
                       {expandedId === service.id && (
