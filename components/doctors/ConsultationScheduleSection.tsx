@@ -18,7 +18,7 @@ export default function ConsultationScheduleSection({ specialists }: Consultatio
           <h2 className="text-3xl font-bold text-secondary-900 mb-4">
             Consultation Schedule
           </h2>
-          <p className="section-subheading max-w-2xl mx-auto text-left md:text-center">
+          <p className="section-subheading max-w-2xl mx-auto text-justify md:text-center">
             Our specialists are available on scheduled days. Please call ahead to confirm availability and book your appointment.
           </p>
         </AnimatedDiv>

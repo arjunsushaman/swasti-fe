@@ -18,7 +18,7 @@ export default function HomecareServices() {
             <span className="block whitespace-nowrap">Our Home Care</span>
             <span className="text-gradient whitespace-nowrap">Services</span>
           </h2>
-          <p className="section-subheading max-w-3xl mx-auto text-left md:text-center">
+          <p className="section-subheading max-w-3xl mx-auto text-justify md:text-center">
             Comprehensive medical care delivered to your doorstep with compassion and expertise
           </p>
         </AnimatedDiv>
@@ -38,7 +38,7 @@ export default function HomecareServices() {
                     <h3 className="text-xl font-semibold text-secondary-900 mb-2">
                       {service.title}
                     </h3>
-                    <p className="text-secondary-600 mb-3 text-left md:text-center">{service.description}</p>
+                    <p className="text-secondary-600 mb-3 text-justify md:text-center">{service.description}</p>
 
                     <AnimatePresence>
                       {expandedId === service.id && (

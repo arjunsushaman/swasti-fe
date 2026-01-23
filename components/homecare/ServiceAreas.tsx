@@ -11,7 +11,7 @@ export default function ServiceAreas() {
           <h2 className="text-[1.5rem] sm:text-3xl md:text-5xl font-bold text-secondary-900 mb-6 leading-tight">
             <span className="text-gradient whitespace-nowrap">Service Areas</span>
           </h2>
-          <p className="section-subheading text-left md:text-center">Home care available in the following locations</p>
+          <p className="section-subheading text-justify md:text-center">Home care available in the following locations</p>
         </AnimatedDiv>
 
         <StaggerContainer className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
