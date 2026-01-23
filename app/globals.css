@@ -8,7 +8,11 @@
   }
 
   body {
-    @apply bg-white text-secondary-900 antialiased;
+    @apply bg-white text-secondary-900 antialiased font-sans;
+  }
+
+  p, li, .text-content, .text-secondary-600, .text-secondary-700 {
+    @apply font-sans text-[15px] font-[500];
   }
 
   h1, h2, h3, h4, h5, h6 {
