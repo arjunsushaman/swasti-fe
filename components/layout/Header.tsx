@@ -17,6 +17,8 @@ export default function Header() {
   const isScrolled = useScrollListener(threshold);
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+  const isHomecarePage = pathname === '/homecare';
+  const shouldBeTransparent = (isHomePage || isHomecarePage) && !isScrolled && !mobileMenuOpen;
   const headerRef = useRef<HTMLDivElement>(null);
 
   // Track active section based on scroll position for hash links
@@ -109,7 +111,7 @@ export default function Header() {
       className={`
         fixed top-0 w-full z-50 transition-all ease-in-out
         ${prefersReducedMotion ? 'duration-100' : (isMobile ? 'duration-300' : 'duration-500')}
-        ${isHomePage && !isScrolled && !mobileMenuOpen
+        ${shouldBeTransparent
           ? 'bg-transparent shadow-none'
           : 'bg-white/95 backdrop-blur-md shadow-lg border-b border-primary-100/20'
         }
@@ -118,7 +120,7 @@ export default function Header() {
       {/* Main header */}
       <div className="container-custom">
         <div className={`flex justify-between items-center transition-all duration-300 ${
-          isHomePage && !isScrolled && !mobileMenuOpen ? 'py-3' : 'py-2 lg:py-3'
+          shouldBeTransparent ? 'py-3' : 'py-2 lg:py-3'
         }`}>
           {/* Logo */}
           <Link href="/" className="flex items-center group">
@@ -128,7 +130,7 @@ export default function Header() {
               width={140}
               height={66}
               className={`w-auto transition-all duration-300 group-hover:scale-105 ${
-                isHomePage && !isScrolled && !mobileMenuOpen ? 'h-12 lg:h-14' : 'h-11 lg:h-12'
+                shouldBeTransparent ? 'h-12 lg:h-14' : 'h-11 lg:h-12'
               }`}
               priority
             />
@@ -136,7 +138,7 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <Navigation
-            isTransparent={isHomePage && !isScrolled && !mobileMenuOpen}
+            isTransparent={shouldBeTransparent}
             activeSection={activeSection}
             setActiveSection={setActiveSection}
           />
@@ -148,7 +150,7 @@ export default function Header() {
                 <Link
                   href="/booking"
                   className={`inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-xl group
-                    ${isHomePage && !isScrolled && !mobileMenuOpen
+                    ${shouldBeTransparent
                       ? 'bg-primary-600 text-white hover:bg-primary-700 border-2 border-primary-600'
                       : 'bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800'
                     }
@@ -164,7 +166,7 @@ export default function Header() {
               <Link
                 href="/booking"
                 className={`inline-flex items-center justify-center px-7 py-3 rounded-full font-semibold transition-all duration-300 shadow-md hover:shadow-xl group
-                  ${isHomePage && !isScrolled && !mobileMenuOpen
+                  ${shouldBeTransparent
                     ? 'bg-primary-600 text-white hover:bg-primary-700 border-2 border-primary-600'
                     : 'bg-gradient-to-r from-primary-600 to-primary-700 text-white hover:from-primary-700 hover:to-primary-800'
                   }
@@ -182,7 +184,7 @@ export default function Header() {
           <motion.button
             whileTap={prefersReducedMotion ? undefined : { scale: 0.9 }}
             className={`lg:hidden p-2 rounded-lg transition-all duration-300 ${
-              isHomePage && !isScrolled && !mobileMenuOpen
+              shouldBeTransparent
                 ? 'text-secondary-900 hover:bg-secondary-900/5'
                 : 'text-secondary-600 hover:bg-primary-50 hover:text-primary-600'
             }`}

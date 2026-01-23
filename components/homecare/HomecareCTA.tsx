@@ -16,7 +16,7 @@ export default function HomecareCTA() {
             Our team is here to bring professional medical care to your doorstep. Contact us today to discuss your home care needs.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col lg:flex-row gap-4 justify-center">
             <a href={CONTACT_INFO.phoneLink} className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-primary-50 transition-colors">
               📞 Call {CONTACT_INFO.phone}
             </a>

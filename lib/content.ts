@@ -52,7 +52,7 @@ export const HOMECARE_CONTENT = {
   hero: {
     title: "Compassionate Medical Care at Your Doorstep",
     subtitle: "Professional healthcare services delivered to your home with the same quality and care you'd receive at our clinic. Ideal for elderly patients, chronic illness management, and post-hospitalization recovery.",
-    image: "/images/swasti-homecare.jpeg",
+    image: "/images/swasti-homecare.png",
   },
 
   services: [
