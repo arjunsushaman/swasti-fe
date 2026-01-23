@@ -10,6 +10,20 @@ export interface EmailJSResponse {
   message: string;
 }
 
+// Map service codes to readable labels
+const SERVICE_LABELS: Record<string, string> = {
+  'general': 'Family Clinic & General Practice',
+  'neurology': 'Neurology Consultation',
+  'orthopaedics': 'Orthopaedics Consultation',
+  'paediatrics': 'Paediatrics Consultation',
+  'pulmonology': 'Pulmonology Consultation',
+  'general-practice': 'General Practice Consultation',
+  'lab': 'Laboratory Services',
+  'neuro-lab': 'Neuro Diagnostic Lab (NCS, EEG)',
+  'physio': 'Physiotherapy & Rehabilitation',
+  'home-care': 'Home Care Services',
+};
+
 export async function sendBookingEmail(data: BookingFormData): Promise<EmailJSResponse> {
   if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
     console.error('EmailJS configuration is missing');
@@ -20,6 +34,14 @@ export async function sendBookingEmail(data: BookingFormData): Promise<EmailJSRe
   }
 
   try {
+    // Format service label for better readability
+    const serviceLabel = SERVICE_LABELS[data.service] || data.service;
+
+    // Format doctor info
+    const doctorInfo = data.doctor
+      ? `${data.doctor} (${serviceLabel})`
+      : 'Any available doctor';
+
     const templateParams = {
       to_name: 'Swasti Lifecare',
       from_name: data.name,
@@ -27,8 +49,8 @@ export async function sendBookingEmail(data: BookingFormData): Promise<EmailJSRe
       from_email: data.email,
       preferred_date: data.preferredDate,
       preferred_time: data.preferredTime,
-      service: data.service,
-      doctor: data.doctor || 'Not specified',
+      service: serviceLabel,
+      doctor: doctorInfo,
       message: data.message || 'No additional message',
       reply_to: data.email,
     };

@@ -9,16 +9,40 @@ import { sendBookingEmail, initEmailJS } from '@/lib/emailjs';
 import { BookingFormData } from '@/types';
 import { DOCTORS_DATA } from '@/lib/constants';
 
-const serviceOptions = [
-  { value: 'general', label: 'Family Clinic & General Practice' },
-  { value: 'neurology', label: 'Neurology Consultation' },
-  { value: 'orthopaedics', label: 'Orthopaedics Consultation' },
-  { value: 'paediatrics', label: 'Paediatrics Consultation' },
-  { value: 'pulmonology', label: 'Pulmonology Consultation' },
-  { value: 'lab', label: 'Laboratory Services' },
-  { value: 'neuro-lab', label: 'Neuro Diagnostic Lab' },
-  { value: 'physio', label: 'Physiotherapy' },
-  { value: 'home-care', label: 'Home Care Services' },
+// Combined service and doctor options
+const combinedServiceOptions = [
+  // General Services
+  {
+    value: 'general|',
+    label: 'Family Clinic & General Practice',
+    group: 'General Services'
+  },
+  {
+    value: 'lab|',
+    label: 'Laboratory Services',
+    group: 'General Services'
+  },
+  {
+    value: 'neuro-lab|',
+    label: 'Neuro Diagnostic Lab (NCS, EEG)',
+    group: 'General Services'
+  },
+  {
+    value: 'physio|',
+    label: 'Physiotherapy & Rehabilitation',
+    group: 'General Services'
+  },
+  {
+    value: 'home-care|',
+    label: 'Home Care Services',
+    group: 'General Services'
+  },
+  // Doctors with their specialties
+  ...DOCTORS_DATA.map((doc) => ({
+    value: `${doc.speciality}|${doc.name}`,
+    label: `${doc.name} — ${doc.specialtyLabel}`,
+    group: 'Specialist Consultations'
+  })),
 ];
 
 const timeSlots = [
@@ -35,21 +59,13 @@ const timeSlots = [
   { value: '20:00', label: '8:00 PM' },
 ];
 
-const doctorOptions = [
-  { value: '', label: 'Any available doctor' },
-  ...DOCTORS_DATA.map((doc) => ({
-    value: doc.name,
-    label: `${doc.name} - ${doc.specialtyLabel}`,
-  })),
-];
-
 interface FormErrors {
   name?: string;
   phone?: string;
   email?: string;
   preferredDate?: string;
   preferredTime?: string;
-  service?: string;
+  serviceDoctor?: string;
 }
 
 export default function BookingForm() {
@@ -63,6 +79,7 @@ export default function BookingForm() {
     doctor: '',
     message: '',
   });
+  const [serviceDoctor, setServiceDoctor] = useState('');
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{
@@ -108,8 +125,8 @@ export default function BookingForm() {
       newErrors.preferredTime = 'Preferred time is required';
     }
 
-    if (!formData.service) {
-      newErrors.service = 'Please select a service';
+    if (!serviceDoctor) {
+      newErrors.serviceDoctor = 'Please select a service or doctor';
     }
 
     setErrors(newErrors);
@@ -126,8 +143,16 @@ export default function BookingForm() {
 
     setIsSubmitting(true);
 
+    // Parse the combined serviceDoctor value
+    const [service, doctor] = serviceDoctor.split('|');
+    const submissionData = {
+      ...formData,
+      service,
+      doctor: doctor || '',
+    };
+
     try {
-      const result = await sendBookingEmail(formData);
+      const result = await sendBookingEmail(submissionData);
       setSubmitStatus({
         type: result.success ? 'success' : 'error',
         message: result.message,
@@ -144,6 +169,7 @@ export default function BookingForm() {
           doctor: '',
           message: '',
         });
+        setServiceDoctor('');
       }
     } catch {
       setSubmitStatus({
@@ -167,9 +193,17 @@ export default function BookingForm() {
 
   const handleCustomChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name as keyof FormErrors]) {
-      setErrors((prev) => ({ ...prev, [name]: undefined }));
+
+    if (name === 'serviceDoctor') {
+      setServiceDoctor(value);
+      if (errors.serviceDoctor) {
+        setErrors((prev) => ({ ...prev, serviceDoctor: undefined }));
+      }
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+      if (errors[name as keyof FormErrors]) {
+        setErrors((prev) => ({ ...prev, [name]: undefined }));
+      }
     }
   };
 
@@ -252,22 +286,14 @@ export default function BookingForm() {
       </div>
 
       <Dropdown
-        label="Service Required"
-        name="service"
-        value={formData.service}
+        label="Select Service or Doctor"
+        name="serviceDoctor"
+        value={serviceDoctor}
         onChange={handleCustomChange}
-        error={errors.service}
-        options={serviceOptions}
-        placeholder="Select a service"
+        error={errors.serviceDoctor}
+        options={combinedServiceOptions}
+        placeholder="Choose a service or doctor consultation"
         required
-      />
-
-      <Dropdown
-        label="Preferred Doctor (Optional)"
-        name="doctor"
-        value={formData.doctor}
-        onChange={handleCustomChange}
-        options={doctorOptions}
       />
 
       <Textarea

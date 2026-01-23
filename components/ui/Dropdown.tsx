@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 interface DropdownOption {
   value: string;
   label: string;
+  group?: string;
 }
 
 interface DropdownProps {
@@ -57,6 +58,18 @@ export function Dropdown({
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Group options by their group property
+  const groupedOptions = filteredOptions.reduce((acc, option) => {
+    const groupName = option.group || 'Other';
+    if (!acc[groupName]) {
+      acc[groupName] = [];
+    }
+    acc[groupName].push(option);
+    return acc;
+  }, {} as Record<string, DropdownOption[]>);
+
+  const hasGroups = options.some(opt => opt.group);
 
   const handleSelect = (optionValue: string) => {
     onChange({ target: { name, value: optionValue } });
@@ -139,7 +152,52 @@ export function Dropdown({
                 <div className="px-4 py-3 text-sm text-secondary-500 text-center">
                   No options found
                 </div>
+              ) : hasGroups ? (
+                // Render grouped options
+                Object.entries(groupedOptions).map(([groupName, groupOptions]) => (
+                  <div key={groupName}>
+                    <div className="px-4 py-2 text-xs font-semibold text-secondary-500 uppercase tracking-wider bg-secondary-50 border-b border-secondary-200">
+                      {groupName}
+                    </div>
+                    {groupOptions.map((option) => {
+                      const isSelected = option.value === value;
+                      return (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() => handleSelect(option.value)}
+                          className={`
+                            w-full px-4 py-3 text-left text-sm transition-colors flex items-center justify-between
+                            ${
+                              isSelected
+                                ? 'bg-primary-50 text-primary-700 font-medium'
+                                : 'text-secondary-700 hover:bg-secondary-50'
+                            }
+                          `}
+                        >
+                          <span>{option.label}</span>
+                          {isSelected && (
+                            <svg
+                              className="w-5 h-5 text-primary-600 flex-shrink-0 ml-2"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                ))
               ) : (
+                // Render flat options
                 filteredOptions.map((option) => {
                   const isSelected = option.value === value;
                   return (
