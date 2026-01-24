@@ -50,7 +50,7 @@ export default function HomecareHero() {
             <span className="text-gradient">at Your Doorstep</span>
           </h1>
 
-          <p className="text-base md:text-lg text-secondary-700 mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed text-justify md:text-center">
+          <p className="text-base md:text-lg text-secondary-700 mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed text-left md:text-center">
             {hero.subtitle}
           </p>
 

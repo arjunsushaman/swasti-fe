@@ -63,7 +63,7 @@ export default function ReviewsSection() {
           <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
             What Our Patients Say
           </h2>
-          <p className="text-lg text-secondary-600 max-w-2xl mx-auto text-justify md:text-center">
+          <p className="text-lg text-secondary-600 max-w-2xl mx-auto text-left md:text-center">
             Real experiences from families we&apos;ve served
           </p>
           {/* Rating summary */}

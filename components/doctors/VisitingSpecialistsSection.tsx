@@ -21,7 +21,7 @@ export default function VisitingSpecialistsSection({ specialists }: VisitingSpec
           <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
             Visiting Specialists
           </h2>
-          <p className="text-lg text-secondary-600 max-w-2xl mx-auto text-justify md:text-center">
+          <p className="text-lg text-secondary-600 max-w-2xl mx-auto text-left md:text-center">
             Our visiting consultants bring advanced expertise right to your neighborhood, so you
             don&apos;t have to travel far for specialized care.
           </p>
