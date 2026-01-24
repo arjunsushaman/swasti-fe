@@ -33,7 +33,7 @@ export default function CTASection() {
       <div className="container-custom relative z-10">
         <div className="max-w-4xl mx-auto text-center text-white">
           <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">Ready to Experience Better Healthcare?</h2>
-          <p className="text-xl text-primary-100 mb-10 max-w-2xl mx-auto leading-relaxed text-left md:text-center">
+          <p className="text-xl text-primary-100 mb-10 max-w-2xl mx-auto leading-relaxed">
             Book an appointment today and discover healthcare that&apos;s intentional, whole, and built on trust.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">

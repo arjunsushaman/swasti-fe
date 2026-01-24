@@ -167,7 +167,7 @@ export default function ServicesSection() {
             <span className="whitespace-nowrap">Comprehensive Healthcare</span> <br />
             <span className="text-gradient whitespace-nowrap">Under One Roof</span>
           </h2>
-          <p className="text-lg text-secondary-600 leading-relaxed text-balance text-left md:text-center">
+          <p className="text-lg text-secondary-600 leading-relaxed text-balance">
             We provide a holistic approach to your health with a wide range of specialized services.
           </p>
         </div>
@@ -218,7 +218,7 @@ export default function ServicesSection() {
 
                     {/* Description - Below gradient background */}
                     <div className="relative z-10 px-4 md:px-5 pb-4 md:pb-5">
-                      <p className="text-secondary-600 leading-relaxed font-medium text-sm md:text-base text-left md:text-center">
+                      <p className="text-secondary-600 leading-relaxed font-medium text-sm md:text-base">
                         {service.description}
                       </p>
                     </div>

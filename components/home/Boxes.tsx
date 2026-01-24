@@ -43,7 +43,7 @@ function Box({ icon, title, description, index }: BoxProps) {
           {title}
         </h3>
       </div>
-      <p className="text-secondary-600 leading-relaxed font-medium text-left md:text-center lg:text-sm">{description}</p>
+      <p className="text-secondary-600 leading-relaxed font-medium lg:text-center lg:text-sm">{description}</p>
     </motion.div>
   );
 }
@@ -70,7 +70,7 @@ export default function Boxes() {
             <span className="block whitespace-nowrap">Why Choose</span>
             <span className="text-gradient whitespace-nowrap">Swasti?</span>
           </h2>
-          <p className="section-subheading max-w-2xl mx-auto text-lg text-secondary-600 text-left md:text-center">
+          <p className="section-subheading max-w-2xl mx-auto text-lg text-secondary-600">
             We are not just a clinic, we are a growing healthcare ecosystem designed around your needs.
           </p>
         </div>

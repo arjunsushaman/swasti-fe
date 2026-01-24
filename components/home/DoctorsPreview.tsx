@@ -129,7 +129,7 @@ export default function DoctorsPreview({ doctors }: DoctorsPreviewProps) {
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">Our Expert Doctors</h2>
-          <p className="section-subheading max-w-2xl mx-auto text-lg text-secondary-600 text-left md:text-center">
+          <p className="section-subheading max-w-2xl mx-auto text-lg text-secondary-600">
             Our team of experienced specialists brings advanced expertise right to your neighborhood.
           </p>
         </div>

@@ -63,7 +63,7 @@ export default function ReviewsSection() {
           <h2 className="text-3xl md:text-4xl font-bold text-secondary-900 mb-4">
             What Our Patients Say
           </h2>
-          <p className="text-lg text-secondary-600 max-w-2xl mx-auto text-left md:text-center">
+          <p className="text-lg text-secondary-600 max-w-2xl mx-auto">
             Real experiences from families we&apos;ve served
           </p>
           {/* Rating summary */}
@@ -72,10 +72,11 @@ export default function ReviewsSection() {
               {[1, 2, 3, 4, 5].map((star) => (
                 <svg
                   key={star}
-                  className={`w-6 h-6 ${star <= Math.round(parseFloat(averageRating))
-                    ? 'text-yellow-400'
-                    : 'text-secondary-200'
-                    }`}
+                  className={`w-6 h-6 ${
+                    star <= Math.round(parseFloat(averageRating))
+                      ? 'text-yellow-400'
+                      : 'text-secondary-200'
+                  }`}
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >

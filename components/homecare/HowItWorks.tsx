@@ -11,7 +11,7 @@ export default function HowItWorks() {
           <h2 className="text-[1.5rem] sm:text-3xl md:text-5xl font-bold text-secondary-900 mb-6 leading-tight">
             <span className="text-gradient whitespace-nowrap">How It Works</span>
           </h2>
-          <p className="section-subheading text-left md:text-center">Simple steps to access quality home care</p>
+          <p className="section-subheading">Simple steps to access quality home care</p>
         </div>
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -27,7 +27,7 @@ export default function HowItWorks() {
                 <h3 className="text-lg font-semibold text-secondary-900 mb-2">
                   {step.title}
                 </h3>
-                <p className="text-secondary-600 text-sm text-left md:text-center">{step.description}</p>
+                <p className="text-secondary-600 text-sm">{step.description}</p>
               </div>
             </StaggerItem>
           ))}

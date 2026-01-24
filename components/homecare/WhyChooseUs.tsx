@@ -22,7 +22,7 @@ export default function WhyChooseUs() {
                 <h3 className="text-lg font-semibold text-secondary-900 mb-2">
                   {benefit.title}
                 </h3>
-                <p className="text-secondary-600 text-left md:text-center">{benefit.description}</p>
+                <p className="text-secondary-600">{benefit.description}</p>
               </div>
             </StaggerItem>
           ))}
