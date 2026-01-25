@@ -105,7 +105,7 @@ export function DatePicker({ label, name, value, onChange, error, required, min 
   ];
 
   return (
-    <div ref={containerRef} className="space-y-1 relative">
+    <div ref={containerRef} className="space-y-0.5 relative">
       {label && (
         <label className="block text-sm font-medium text-secondary-700">
           {label}

@@ -213,10 +213,10 @@ export default function BookingForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
       {submitStatus.type && (
         <div
-          className={`p-4 rounded-lg ${
+          className={`p-3 rounded-lg ${
             submitStatus.type === 'success'
               ? 'bg-green-50 text-green-800 border border-green-200'
               : 'bg-red-50 text-red-800 border border-red-200'
@@ -227,7 +227,7 @@ export default function BookingForm() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
           label="Full Name"
           name="name"
@@ -262,7 +262,7 @@ export default function BookingForm() {
         required
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <DatePicker
           label="Preferred Date"
           name="preferredDate"
@@ -302,10 +302,10 @@ export default function BookingForm() {
         value={formData.message}
         onChange={handleChange}
         placeholder="Any specific concerns or requirements..."
-        rows={4}
+        rows={3}
       />
 
-      <div className="pt-4">
+      <div className="pt-2">
         <Button type="submit" className="w-full md:w-auto" isLoading={isSubmitting}>
           {isSubmitting ? 'Submitting...' : 'Request Appointment'}
         </Button>

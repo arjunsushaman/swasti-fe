@@ -10,7 +10,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const inputId = id || props.name;
 
     return (
-      <div className="space-y-1">
+      <div className="space-y-0.5">
         {label && (
           <label htmlFor={inputId} className="block text-sm font-medium text-secondary-700">
             {label}
@@ -47,7 +47,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const textareaId = id || props.name;
 
     return (
-      <div className="space-y-1">
+      <div className="space-y-0.5">
         {label && (
           <label htmlFor={textareaId} className="block text-sm font-medium text-secondary-700">
             {label}
@@ -57,7 +57,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <textarea
           ref={ref}
           id={textareaId}
-          className={`input-field min-h-[100px] resize-y ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''} ${className}`}
+          className={`input-field min-h-[80px] resize-y ${error ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' : ''} ${className}`}
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={error ? `${textareaId}-error` : undefined}
           {...props}
@@ -86,7 +86,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const selectId = id || props.name;
 
     return (
-      <div className="space-y-1">
+      <div className="space-y-0.5">
         {label && (
           <label htmlFor={selectId} className="block text-sm font-medium text-secondary-700">
             {label}
