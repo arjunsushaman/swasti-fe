@@ -1,5 +1,5 @@
 # Robots.txt for Swasti Lifecare
-# https://swastilifescare.com
+# https://swastilifecare.in
 
 User-agent: *
 Allow: /
@@ -9,4 +9,4 @@ Disallow: /api/
 Disallow: /_next/
 
 # Sitemap
-Sitemap: https://swastilifescare.com/sitemap.xml
+Sitemap: https://swastilifecare.in/sitemap.xml

@@ -27,12 +27,12 @@ export const metadata: Metadata = {
   description:
     'Book an appointment at Swasti Lifecare. Schedule your consultation with our general practitioner or visiting specialists.',
   alternates: {
-    canonical: 'https://swastilifescare.com/booking',
+    canonical: 'https://swastilifecare.in/booking',
   },
   openGraph: {
     title: 'Book an Appointment at Swasti Lifecare',
     description: 'Schedule your consultation with our medical specialists in Kerala',
-    url: 'https://swastilifescare.com/booking',
+    url: 'https://swastilifecare.in/booking',
   },
 };
 

@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   description:
     'Meet our experienced team of medical specialists at Swasti Lifecare. Expert care in neurology, orthopedics, pediatrics, pulmonology, and general practice in Parippally, Kerala.',
   alternates: {
-    canonical: 'https://swastilifescare.com/doctors',
+    canonical: 'https://swastilifecare.in/doctors',
   },
   openGraph: {
     title: 'Expert Medical Specialists at Swasti Lifecare',
     description: 'Experienced doctors providing specialized healthcare in Kerala',
-    url: 'https://swastilifescare.com/doctors',
+    url: 'https://swastilifecare.in/doctors',
   },
 };
 

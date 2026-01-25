@@ -38,7 +38,7 @@ public/images/og-image.jpg
 
 **URL:**
 ```
-https://swastilifescare.com/images/og-image.jpg
+https://swastilifecare.in/images/og-image.jpg
 ```
 
 ---
@@ -52,7 +52,7 @@ https://swastilifescare.com/images/og-image.jpg
 2. **Main Tagline** - "Clarity. Compassion. Care that continues."
 3. **Secondary Text** - "Expert Healthcare in Parippally, Kerala"
 4. **Phone Number** - "+91-8547734214" (highly visible)
-5. **Website URL** - "swastilifescare.com" (optional, bottom)
+5. **Website URL** - "swastilifecare.in" (optional, bottom)
 
 **Optional Elements:**
 - Medical imagery (clinic photo, stethoscope, medical cross)
@@ -73,7 +73,7 @@ https://swastilifescare.com/images/og-image.jpg
 │      Expert Healthcare in Parippally, Kerala    │
 │                                                  │
 │           📞 +91-8547734214                      │
-│           swastilifescare.com                    │
+│           swastilifecare.in                    │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -230,20 +230,20 @@ Colors: White, teal, dark gray
 
 **Facebook:**
 1. Go to https://developers.facebook.com/tools/debug/
-2. Enter: https://swastilifescare.com
+2. Enter: https://swastilifecare.in
 3. Click "Scrape Again" to refresh cache
 4. Verify image appears correctly
 5. Check for warnings/errors
 
 **LinkedIn:**
 1. Go to https://www.linkedin.com/post-inspector/
-2. Enter: https://swastilifescare.com
+2. Enter: https://swastilifecare.in
 3. Verify image preview
 4. Clear cache if needed
 
 **Twitter:**
 1. Go to https://cards-dev.twitter.com/validator
-2. Enter: https://swastilifescare.com
+2. Enter: https://swastilifecare.in
 3. Preview card
 4. Request approval if needed
 
@@ -258,7 +258,7 @@ Colors: White, teal, dark gray
 **Image Not Showing:**
 1. Clear social media cache (use debuggers above)
 2. Wait 24 hours for cache refresh
-3. Verify file is accessible: https://swastilifescare.com/images/og-image.jpg
+3. Verify file is accessible: https://swastilifecare.in/images/og-image.jpg
 4. Check browser console for 404 errors
 5. Verify file name is exactly "og-image.jpg"
 
@@ -290,7 +290,7 @@ PHONE NUMBER:
 +91-8547734214
 
 WEBSITE:
-swastilifescare.com
+swastilifecare.in
 
 ADDITIONAL INFO:
 - Open Daily: 9 AM - 9 PM
@@ -351,7 +351,7 @@ openGraph: {
 ### 3. Test After Deployment
 
 1. Wait for Vercel deployment (2-5 minutes)
-2. Visit: https://swastilifescare.com/images/og-image.jpg
+2. Visit: https://swastilifecare.in/images/og-image.jpg
 3. Should display the image
 4. Use social media debuggers to verify
 5. Share on platforms to test real-world appearance

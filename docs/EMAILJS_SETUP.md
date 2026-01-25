@@ -117,7 +117,7 @@ EmailJS needs to connect to an email provider to send emails on your behalf.
 
 **Important Notes:**
 - For Gmail: You may need to enable "Less secure app access" or use an App Password if 2FA is enabled
-- For production: Consider using a dedicated clinic email (e.g., `bookings@swastilifescare.com`)
+- For production: Consider using a dedicated clinic email (e.g., `bookings@swastilifecare.in`)
 
 ---
 
@@ -215,7 +215,7 @@ Setting up an auto-reply ensures patients receive immediate confirmation when th
 
    **From Email:**
    ```
-   bookings@swastilifescare.com
+   bookings@swastilifecare.in
    ```
    (Use your clinic's email address)
 
@@ -254,7 +254,7 @@ Setting up an auto-reply ensures patients receive immediate confirmation when th
    <p>If you need urgent medical attention or have questions about your appointment, please contact us:</p>
    <ul>
      <li><strong>Phone:</strong> +91 1234567890</li>
-     <li><strong>Email:</strong> bookings@swastilifescare.com</li>
+     <li><strong>Email:</strong> bookings@swastilifecare.in</li>
      <li><strong>WhatsApp:</strong> +91 1234567890</li>
    </ul>
 
@@ -529,7 +529,7 @@ const SERVICE_LABELS: Record<string, string> = {
 ### Email Deliverability
 
 1. **Use Professional Email Address**
-   - Instead of personal Gmail, use `bookings@swastilifescare.com`
+   - Instead of personal Gmail, use `bookings@swastilifecare.in`
    - Set up custom domain email through Google Workspace, Microsoft 365, or hosting provider
    - This improves trust and professionalism
 

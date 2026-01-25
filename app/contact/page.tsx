@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   description:
     'Get in touch with Swasti Lifecare. Visit us in Parippally, Kerala or call +91-8547734214. Open daily 9 AM - 9 PM.',
   alternates: {
-    canonical: 'https://swastilifescare.com/contact',
+    canonical: 'https://swastilifecare.in/contact',
   },
   openGraph: {
     title: 'Contact Swasti Lifecare - Expert Healthcare in Kerala',
     description: 'Visit our clinic in Parippally or call us for appointments',
-    url: 'https://swastilifescare.com/contact',
+    url: 'https://swastilifecare.in/contact',
   },
 };
 

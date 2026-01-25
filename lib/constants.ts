@@ -1,7 +1,7 @@
 import { NavItem } from '@/types';
 
 export const SITE_NAME = 'Swasti Lifecare';
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://swastilifescare.com';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://swastilifecare.in';
 
 export const MAIN_LINE = 'Clarity. Compassion. Care that continues.';
 
@@ -13,7 +13,7 @@ export const CONTACT_INFO = {
   phone: '+91-8547734214',
   phoneLink: 'tel:+918547734214',
   whatsappLink: 'https://wa.me/918547734214',
-  email: 'contact@swastilifescare.com',
+  email: 'vcarewell4u@gmail.com',
   streetAddress: 'Paravur - Parippally Rd, opp. bus stop, Parippally, Kerala 691574',
   locationLink: 'https://www.google.com/maps/search/?api=1&query=Swasti+Lifecare+Paravur+Parippally+Rd+opp+bus+stop+Parippally+Kerala+691574',
   instagramLink: 'https://www.instagram.com/swasti_lifecare',

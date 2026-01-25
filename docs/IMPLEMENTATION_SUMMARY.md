@@ -7,7 +7,7 @@ This document summarizes the comprehensive SEO optimizations implemented for the
 **Implementation Date:** January 2026
 **Framework:** Next.js 14 with App Router
 **Hosting:** Vercel
-**Domain:** swastilifescare.com (GoDaddy)
+**Domain:** swastilifecare.in (GoDaddy)
 
 ---
 
@@ -397,7 +397,7 @@ These tasks require manual intervention or external tool access:
    NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
    ```
 4. Deploy
-5. Add custom domain: swastilifescare.com
+5. Add custom domain: swastilifecare.in
 6. Verify SSL certificate
 
 **Resources:**
@@ -427,7 +427,7 @@ These tasks require manual intervention or external tool access:
 
 **Action Required:**
 1. Go to https://search.google.com/search-console
-2. Add property: swastilifescare.com
+2. Add property: swastilifecare.in
 3. Choose DNS verification method
 4. Add TXT record in GoDaddy DNS:
    ```
@@ -437,7 +437,7 @@ These tasks require manual intervention or external tool access:
    TTL: 3600
    ```
 5. Click "Verify" in Search Console
-6. Submit sitemap: https://swastilifescare.com/sitemap.xml
+6. Submit sitemap: https://swastilifecare.in/sitemap.xml
 
 **Resources:**
 - See `docs/DEPLOYMENT_GUIDE.md` Phase 6

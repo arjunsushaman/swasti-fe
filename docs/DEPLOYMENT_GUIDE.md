@@ -3,7 +3,7 @@
 ## Overview
 
 This guide walks you through deploying the Swasti Lifecare website using:
-- **Domain Registrar:** GoDaddy (swastilifescare.com)
+- **Domain Registrar:** GoDaddy (swastilifecare.in)
 - **Hosting Platform:** Vercel (Next.js optimized, free tier)
 
 **Benefits of This Setup:**
@@ -21,7 +21,7 @@ This guide walks you through deploying the Swasti Lifecare website using:
 ## Prerequisites
 
 Before you begin, ensure you have:
-- [ ] GoDaddy account with swastilifescare.com registered
+- [ ] GoDaddy account with swastilifecare.in registered
 - [ ] GitHub account with repository access
 - [ ] Access to GoDaddy DNS management
 - [ ] Basic understanding of DNS records
@@ -51,7 +51,7 @@ npm run start
 **3. Check environment variables:**
 Create `.env.local` for local testing (not committed to Git):
 ```
-NEXT_PUBLIC_SITE_URL=https://swastilifescare.com
+NEXT_PUBLIC_SITE_URL=https://swastilifecare.in
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 ```
 
@@ -98,7 +98,7 @@ Click "Environment Variables" and add:
 
 | Name | Value | Environment |
 |------|-------|-------------|
-| `NEXT_PUBLIC_SITE_URL` | `https://swastilifescare.com` | Production |
+| `NEXT_PUBLIC_SITE_URL` | `https://swastilifecare.in` | Production |
 | `NEXT_PUBLIC_GA_ID` | `G-XXXXXXXXXX` | Production |
 
 **Important Notes:**
@@ -125,7 +125,7 @@ Click "Environment Variables" and add:
 - Go to https://dcc.godaddy.com
 - Sign in with your account
 - Navigate to "My Products"
-- Click "DNS" next to swastilifescare.com
+- Click "DNS" next to swastilifecare.in
 
 **2. Add A Record (for root domain):**
 
@@ -137,7 +137,7 @@ Value: 76.76.21.21
 TTL: 3600 (1 hour)
 ```
 
-**What this does:** Points swastilifescare.com to Vercel's IP
+**What this does:** Points swastilifecare.in to Vercel's IP
 
 **3. Add CNAME Record (for www subdomain):**
 
@@ -149,7 +149,7 @@ Value: cname.vercel-dns.com
 TTL: 3600 (1 hour)
 ```
 
-**What this does:** Points www.swastilifescare.com to Vercel
+**What this does:** Points www.swastilifecare.in to Vercel
 
 **4. Remove Conflicting Records:**
 
@@ -177,13 +177,13 @@ TTL: 3600 (1 hour)
 - Project → Settings → Domains
 
 **2. Add Root Domain:**
-- Enter: `swastilifescare.com`
+- Enter: `swastilifecare.in`
 - Click "Add"
 - Vercel will detect your DNS configuration
 - Wait for verification (may take a few minutes)
 
 **3. Add WWW Subdomain:**
-- Enter: `www.swastilifescare.com`
+- Enter: `www.swastilifecare.in`
 - Click "Add"
 - Vercel will detect your CNAME record
 - Wait for verification
@@ -191,12 +191,12 @@ TTL: 3600 (1 hour)
 **4. Configure Redirects:**
 
 **Option A: Redirect www → non-www (Recommended)**
-- Primary: swastilifescare.com
-- Redirect: www.swastilifescare.com → swastilifescare.com
+- Primary: swastilifecare.in
+- Redirect: www.swastilifecare.in → swastilifecare.in
 
 **Option B: Redirect non-www → www**
-- Primary: www.swastilifescare.com
-- Redirect: swastilifescare.com → www.swastilifescare.com
+- Primary: www.swastilifecare.in
+- Redirect: swastilifecare.in → www.swastilifecare.in
 
 **How to set:**
 Vercel automatically handles this. The first domain you add becomes primary.
@@ -214,11 +214,11 @@ Vercel automatically handles this. The first domain you add becomes primary.
 **1. Check DNS Propagation:**
 
 Use https://dnschecker.org:
-- Enter: swastilifescare.com
+- Enter: swastilifecare.in
 - Type: A
 - Check: Should show 76.76.21.21 globally
 
-- Enter: www.swastilifescare.com
+- Enter: www.swastilifecare.in
 - Type: CNAME
 - Check: Should show cname.vercel-dns.com globally
 
@@ -226,7 +226,7 @@ Use https://dnschecker.org:
 
 **Root domain:**
 ```
-https://swastilifescare.com
+https://swastilifecare.in
 ```
 ✅ Should load with HTTPS
 ✅ Should show padlock icon
@@ -234,21 +234,21 @@ https://swastilifescare.com
 
 **WWW subdomain:**
 ```
-https://www.swastilifescare.com
+https://www.swastilifecare.in
 ```
 ✅ Should redirect to non-www (or vice versa)
 ✅ Should load with HTTPS
 
 **3. Test All Pages:**
-- [ ] Homepage: https://swastilifescare.com
-- [ ] Doctors: https://swastilifescare.com/doctors
-- [ ] Booking: https://swastilifescare.com/booking
-- [ ] Homecare: https://swastilifescare.com/homecare
-- [ ] Contact: https://swastilifescare.com/contact
+- [ ] Homepage: https://swastilifecare.in
+- [ ] Doctors: https://swastilifecare.in/doctors
+- [ ] Booking: https://swastilifecare.in/booking
+- [ ] Homecare: https://swastilifecare.in/homecare
+- [ ] Contact: https://swastilifecare.in/contact
 
 **4. Check SEO Elements:**
-- [ ] Sitemap: https://swastilifescare.com/sitemap.xml
-- [ ] Robots.txt: https://swastilifescare.com/robots.txt
+- [ ] Sitemap: https://swastilifecare.in/sitemap.xml
+- [ ] Robots.txt: https://swastilifecare.in/robots.txt
 - [ ] Favicon loads
 - [ ] OG image in page source
 - [ ] Meta tags in page source
@@ -282,7 +282,7 @@ Run Lighthouse audit:
 - Go to https://search.google.com/search-console
 - Click "Add Property"
 - Select "Domain" property type
-- Enter: swastilifescare.com
+- Enter: swastilifecare.in
 
 **2. Verify Domain (DNS Method - Recommended):**
 
@@ -310,7 +310,7 @@ google-site-verification=abc123xyz...
 
 **5. Submit Sitemap:**
 - In Search Console, go to "Sitemaps"
-- Enter: `https://swastilifescare.com/sitemap.xml`
+- Enter: `https://swastilifecare.in/sitemap.xml`
 - Click "Submit"
 - Check status (should be "Success" within a few hours)
 

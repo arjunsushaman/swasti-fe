@@ -65,10 +65,10 @@ The website has been optimized with:
 **Vercel Dashboard:**
 - [ ] Sign up/login to Vercel
 - [ ] Import GitHub repository
-- [ ] Add custom domain: swastilifescare.com
-- [ ] Add www variant: www.swastilifescare.com
+- [ ] Add custom domain: swastilifecare.in
+- [ ] Add www variant: www.swastilifecare.in
 - [ ] Wait for SSL certificate provisioning (5-10 min)
-- [ ] Verify HTTPS works: https://swastilifescare.com
+- [ ] Verify HTTPS works: https://swastilifecare.in
 
 **Environment Variables:**
 - [ ] Create Google Analytics 4 property
@@ -83,7 +83,7 @@ The website has been optimized with:
 
 **Google Search Console:**
 - [ ] Sign up at https://search.google.com/search-console
-- [ ] Add property: swastilifescare.com (Domain type)
+- [ ] Add property: swastilifecare.in (Domain type)
 - [ ] Get TXT verification record from Google
 - [ ] Add TXT record in GoDaddy DNS:
   - Type: TXT
@@ -92,7 +92,7 @@ The website has been optimized with:
   - TTL: 3600
 - [ ] Wait 1-24 hours for verification
 - [ ] Click "Verify" in Search Console
-- [ ] Submit sitemap: https://swastilifescare.com/sitemap.xml
+- [ ] Submit sitemap: https://swastilifecare.in/sitemap.xml
 
 **Google Business Profile:**
 - [ ] Create/claim profile at https://business.google.com
@@ -206,7 +206,7 @@ import { DoctorSchema } from '@/components/seo/DoctorSchema';
 ```typescript
 // Add new pages to app/api/sitemap/route.ts
 {
-  url: 'https://swastilifescare.com/new-page',
+  url: 'https://swastilifecare.in/new-page',
   lastModified: new Date(),
   changeFrequency: 'weekly',
   priority: 0.8,
@@ -216,7 +216,7 @@ import { DoctorSchema } from '@/components/seo/DoctorSchema';
 **Submit to Google:**
 1. Go to Search Console
 2. Sitemaps section
-3. Add: https://swastilifescare.com/sitemap.xml
+3. Add: https://swastilifecare.in/sitemap.xml
 4. Click "Submit"
 
 ### 4. Robots.txt Configuration
@@ -227,7 +227,7 @@ import { DoctorSchema } from '@/components/seo/DoctorSchema';
 ```
 User-agent: *
 Allow: /
-Sitemap: https://swastilifescare.com/sitemap.xml
+Sitemap: https://swastilifecare.in/sitemap.xml
 ```
 
 **What NOT to block:**
@@ -251,17 +251,17 @@ All pages have canonical tags in metadata:
 ```typescript
 export const metadata: Metadata = {
   alternates: {
-    canonical: 'https://swastilifescare.com/page-url',
+    canonical: 'https://swastilifecare.in/page-url',
   },
 };
 ```
 
 **Current Pages:**
-- Homepage: https://swastilifescare.com/
-- Doctors: https://swastilifescare.com/doctors
-- Booking: https://swastilifescare.com/booking
-- Homecare: https://swastilifescare.com/homecare
-- Contact: https://swastilifescare.com/contact
+- Homepage: https://swastilifecare.in/
+- Doctors: https://swastilifecare.in/doctors
+- Booking: https://swastilifecare.in/booking
+- Homecare: https://swastilifecare.in/homecare
+- Contact: https://swastilifecare.in/contact
 
 ### 6. Image Optimization
 
@@ -393,7 +393,7 @@ We're sorry to hear about your experience, [Name]. We take all feedback seriousl
 
 **Information to Include:**
 - Exact NAP (Name, Address, Phone)
-- Website: https://swastilifescare.com
+- Website: https://swastilifecare.in
 - Hours: 9:00 AM - 9:00 PM (Daily)
 - Services: All 6 specialties + lab + physiotherapy
 - Photos: Same as Google Business Profile

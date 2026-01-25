@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://swastilifescare.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://swastilifecare.in';
 
 // Static pages
 const staticPages = [

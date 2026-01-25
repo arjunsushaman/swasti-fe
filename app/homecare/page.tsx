@@ -13,12 +13,12 @@ export const metadata: Metadata = {
   description:
     'Professional medical care at your doorstep. Doctor visits, nursing care, physiotherapy, and specialized services for elderly and recovering patients in Paravur, Varkala, and surrounding areas.',
   alternates: {
-    canonical: 'https://swastilifescare.com/homecare',
+    canonical: 'https://swastilifecare.in/homecare',
   },
   openGraph: {
     title: 'Home Care Services in Kerala - Swasti Lifecare',
     description: 'Professional medical care at your doorstep in Paravur, Varkala and surrounding areas',
-    url: 'https://swastilifescare.com/homecare',
+    url: 'https://swastilifecare.in/homecare',
   },
 };
 
