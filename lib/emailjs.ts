@@ -52,7 +52,6 @@ export async function sendBookingEmail(data: BookingFormData): Promise<EmailJSRe
       service: serviceLabel,
       doctor: doctorInfo,
       message: data.message || 'No additional message',
-      reply_to: data.email,
     };
 
     const response = await emailjs.send(
