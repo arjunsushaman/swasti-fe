@@ -39,10 +39,10 @@ export default function Hero() {
         </div>
 
         {/* Header gradient for navigation visibility - all screens */}
-        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/70 via-white/30 to-transparent pointer-events-none z-[5]" />
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/50 via-white/15 to-transparent pointer-events-none z-[5]" />
 
         {/* Mobile: Strong center gradient for text readability */}
-        <div className="md:hidden absolute inset-0 bg-gradient-to-b from-white/75 via-white/60 to-white/30 pointer-events-none z-[1]" />
+        <div className="md:hidden absolute inset-0 bg-gradient-to-b from-white/50 via-white/35 to-white/10 pointer-events-none z-[1]" />
 
         {/* Desktop: Radial gradient centered on content */}
         <div
@@ -147,7 +147,7 @@ export default function Hero() {
               >
                 <a
                   href={CONTACT_INFO.phoneLink}
-                  className="group w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-white/50 hover:bg-white transition-all duration-300 text-secondary-500 font-medium text-sm"
+                  className="group w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-white/85 backdrop-blur-sm hover:bg-white transition-all duration-300 text-secondary-500 font-medium text-sm"
                 >
                   <div className="p-1 bg-primary-100 rounded-full text-primary-600 group-hover:scale-110 transition-transform flex-shrink-0">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,7 +163,7 @@ export default function Hero() {
                 variants={staggerItem}
                 transition={prefersReducedMotion ? { duration: 0 } : { ...defaultTransition, delay: 0.6 }}
               >
-                <div className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-white/50 text-secondary-500 font-medium text-sm">
+                <div className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg bg-white/85 backdrop-blur-sm text-secondary-500 font-medium text-sm">
                   <div className="p-1 bg-accent-100 rounded-full text-accent-600 flex-shrink-0">
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
