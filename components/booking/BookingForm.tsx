@@ -5,6 +5,7 @@ import { Input, Textarea } from '@/components/ui/Input';
 import { DatePicker } from '@/components/ui/DatePicker';
 import { Dropdown } from '@/components/ui/Dropdown';
 import Button from '@/components/ui/Button';
+import SuccessModal from '@/components/ui/SuccessModal';
 import { sendBookingEmail, initEmailJS } from '@/lib/emailjs';
 import { BookingFormData } from '@/types';
 import { DOCTORS_DATA } from '@/lib/constants';
@@ -86,6 +87,7 @@ export default function BookingForm() {
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   useEffect(() => {
     initEmailJS();
@@ -153,12 +155,12 @@ export default function BookingForm() {
 
     try {
       const result = await sendBookingEmail(submissionData);
-      setSubmitStatus({
-        type: result.success ? 'success' : 'error',
-        message: result.message,
-      });
 
       if (result.success) {
+        // Show success modal instead of inline message
+        setShowSuccessModal(true);
+
+        // Reset form
         setFormData({
           name: '',
           phone: '',
@@ -170,6 +172,13 @@ export default function BookingForm() {
           message: '',
         });
         setServiceDoctor('');
+        setSubmitStatus({ type: null, message: '' });
+      } else {
+        // Show error inline
+        setSubmitStatus({
+          type: 'error',
+          message: result.message,
+        });
       }
     } catch {
       setSubmitStatus({
@@ -214,13 +223,9 @@ export default function BookingForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4" noValidate>
-      {submitStatus.type && (
+      {submitStatus.type === 'error' && (
         <div
-          className={`p-3 rounded-lg ${
-            submitStatus.type === 'success'
-              ? 'bg-green-50 text-green-800 border border-green-200'
-              : 'bg-red-50 text-red-800 border border-red-200'
-          }`}
+          className="p-3 rounded-lg bg-red-50 text-red-800 border border-red-200"
           role="alert"
         >
           {submitStatus.message}
@@ -315,6 +320,15 @@ export default function BookingForm() {
         By submitting this form, you agree to be contacted by our team to confirm your appointment.
         We typically respond within 2-4 hours during clinic hours.
       </p>
+
+      <SuccessModal
+        isOpen={showSuccessModal}
+        onClose={() => setShowSuccessModal(false)}
+        title="Appointment Booked!"
+        message="We will contact you shortly to confirm your appointment."
+        redirectPath="/"
+        autoRedirectDelay={3000}
+      />
     </form>
   );
 }
