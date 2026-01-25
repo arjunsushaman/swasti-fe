@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MAIN_LINE, SUB_LINE, CONTACT_INFO } from '@/lib/constants';
 import { fadeInUp, fadeIn, staggerContainer, staggerItem, defaultTransition } from '@/lib/animations';
@@ -11,26 +12,48 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-primary-50 pt-20">
-      {/* Dynamic Background Elements */}
+      {/* Background Images and Overlays */}
       <div className="absolute inset-0 w-full h-full overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-radial from-white via-primary-50 to-primary-100 opacity-80" />
+        {/* Desktop Background Image (≥ 768px) */}
+        <div className="hidden md:block absolute inset-0">
+          <Image
+            src="/images/landing-page-cover.jpeg"
+            alt="Swasti Lifecare Clinic Building"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={100}
+          />
+        </div>
 
-        {/* Animated blobs - shown by default until mounted, then conditionally */}
-        {(!mounted || !shouldDisableInfiniteAnimations) && (
-          <>
-            <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob" />
-            <div className="absolute top-[-10%] right-[-10%] w-96 h-96 bg-accent-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animate-delay-2000" />
-            <div className="absolute bottom-[-20%] left-[20%] w-96 h-96 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animate-delay-4000" />
-          </>
-        )}
+        {/* Mobile Background Image (< 768px) */}
+        <div className="md:hidden absolute inset-0">
+          <Image
+            src="/images/landing-mobile-cover.jpeg"
+            alt="Swasti Lifecare Clinic"
+            fill
+            className="object-cover object-center"
+            priority
+            quality={100}
+          />
+        </div>
 
-        {/* Static fallback for mobile/reduced motion - only after mount */}
-        {mounted && shouldDisableInfiniteAnimations && (
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-100 via-primary-50 to-accent-50 opacity-50" />
-        )}
+        {/* Header gradient for navigation visibility - all screens */}
+        <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white/70 via-white/30 to-transparent pointer-events-none z-[5]" />
 
-        {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]" />
+        {/* Mobile: Strong center gradient for text readability */}
+        <div className="md:hidden absolute inset-0 bg-gradient-to-b from-white/75 via-white/60 to-white/30 pointer-events-none z-[1]" />
+
+        {/* Desktop: Radial gradient centered on content */}
+        <div
+          className="hidden md:block absolute inset-0 pointer-events-none z-[1]"
+          style={{
+            background: 'radial-gradient(circle at center, white 0%, rgba(255,255,255,0.7) 30%, rgba(255,255,255,0.5) 50%, transparent 70%)'
+          }}
+        />
+
+        {/* Subtle grain texture overlay */}
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] pointer-events-none" />
       </div>
 
       <div className="container-custom relative z-10">
@@ -40,7 +63,7 @@ export default function Hero() {
             initial={!mounted || prefersReducedMotion ? undefined : { opacity: 0, y: 20 }}
             animate={!mounted || prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
             transition={!mounted || prefersReducedMotion ? { duration: 0 } : { delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-md border border-white/60 shadow-sm mb-6 md:mb-8"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur-md border border-white/60 shadow-sm mb-6 md:mb-8"
           >
             <span className={`flex h-2 w-2 rounded-full bg-accent-500 ${mounted && !prefersReducedMotion ? 'animate-pulse' : ''}`}></span>
             <span className="text-sm font-medium text-secondary-600">Your Health, Our Priority</span>
