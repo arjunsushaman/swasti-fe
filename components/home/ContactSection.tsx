@@ -126,7 +126,7 @@ export default function ContactSection() {
                   <div>
                     <h3 className="text-lg font-semibold text-secondary-900 mb-2">Clinic Hours</h3>
                     <p className="text-secondary-600">
-                      <span className="font-medium">Monday - Sunday:</span> {CONTACT_INFO.clinicHours}
+                      <span className="font-medium">Open everyday:</span> {CONTACT_INFO.clinicHours}
                     </p>
                     <p className="text-secondary-500 mt-2 text-sm">
                       Specialist timings vary.{' '}

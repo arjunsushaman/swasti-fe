@@ -81,7 +81,7 @@ export default function BookingPage() {
               <h3 className="text-lg font-semibold text-secondary-900 mb-4">Clinic Hours</h3>
               <div className="space-y-2 text-secondary-600">
                 <div className="flex justify-between">
-                  <span>Monday - Sunday</span>
+                  <span>Open everyday</span>
                   <span className="font-medium">{CONTACT_INFO.clinicHours}</span>
                 </div>
               </div>

@@ -34,7 +34,7 @@ export const VALUE_BOXES = [
     icon: '🩺',
     title: 'Whole-Person, Family-First Care',
     description:
-      'Our family clinic treats every patient as a person, not a number with time, attention, and a commitment to long-term relationships.',
+      'Our family clinic treats every patient as a person, not a number, giving time, attention, and a commitment to long-term care.',
   },
   {
     icon: '🧠',
