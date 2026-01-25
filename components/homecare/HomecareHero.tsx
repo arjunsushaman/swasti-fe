@@ -12,7 +12,7 @@ export default function HomecareHero() {
       {/* Desktop Background Image (≥ 768px) */}
       <div className="hidden md:block absolute inset-0">
         <Image
-          src="/images/homecare-cover.png"
+          src="/images/homecare-cover.jpeg"
           alt="Swasti Home Care Services"
           fill
           className="object-cover object-center"
