@@ -8,7 +8,9 @@
       "Bash(npm install)",
       "Bash(timeout 30 npm run dev:*)",
       "Bash(npm run build:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(test:*)",
+      "Bash(ls -la \"C:\\\\development\\\\ext\\\\swasti-ui\\\\frontend\\\\frontend\\\\app\"\" | findstr /E \"page|contact \")"
     ]
   }
 }

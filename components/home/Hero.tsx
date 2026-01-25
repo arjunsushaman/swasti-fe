@@ -18,7 +18,7 @@ export default function Hero() {
         <div className="hidden md:block absolute inset-0">
           <Image
             src="/images/landing-page-cover.jpeg"
-            alt="Swasti Lifecare Clinic Building"
+            alt="Swasti Lifecare Medical Clinic in Parippally Kerala - Expert Healthcare Services"
             fill
             className="object-cover object-center"
             priority
@@ -30,7 +30,7 @@ export default function Hero() {
         <div className="md:hidden absolute inset-0">
           <Image
             src="/images/landing-mobile-cover.jpeg"
-            alt="Swasti Lifecare Clinic"
+            alt="Swasti Lifecare Family Clinic Kerala - Quality Healthcare in Parippally"
             fill
             className="object-cover object-center"
             priority

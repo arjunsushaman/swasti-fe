@@ -13,7 +13,7 @@ export default function HomecareHero() {
       <div className="hidden md:block absolute inset-0">
         <Image
           src="/images/homecare-cover.jpeg"
-          alt="Swasti Home Care Services"
+          alt="Professional home care medical services in Kerala - Swasti Lifecare"
           fill
           className="object-cover object-center"
           priority
@@ -25,7 +25,7 @@ export default function HomecareHero() {
       <div className="md:hidden absolute inset-x-0 bottom-0 top-48">
         <Image
           src="/images/swasti-homecare.png"
-          alt="Swasti Home Care Services"
+          alt="Home healthcare services in Parippally Kerala - Swasti Lifecare"
           fill
           className="object-cover object-center"
           priority

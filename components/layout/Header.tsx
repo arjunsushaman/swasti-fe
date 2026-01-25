@@ -126,7 +126,7 @@ export default function Header() {
           <Link href="/" className="flex items-center group">
             <Image
               src="/images/logo-swasti.png"
-              alt="Swasti Lifecare"
+              alt="Swasti Lifecare - Family Medical Clinic in Parippally Kerala"
               width={140}
               height={66}
               className={`w-auto transition-all duration-300 group-hover:scale-105 ${

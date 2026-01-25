@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { MedicalBusinessJsonLd } from '@/components/seo/JsonLd';
+import { GoogleAnalytics } from './GoogleAnalytics';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+import { Analytics } from '@vercel/analytics/react';
 import { SITE_NAME, SITE_URL, MAIN_LINE, SUB_LINE } from '@/lib/constants';
 import './globals.css';
 
@@ -87,6 +90,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <MedicalBusinessJsonLd />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://api.emailjs.com" />
       </head>
       <body className={inter.className}>
         <a
@@ -100,6 +106,11 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );

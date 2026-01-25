@@ -24,7 +24,7 @@ export default function DoctorsHero({ generalPractitioner }: DoctorsHeroProps) {
             Expert Medical Team
           </span>
           <h1 className="text-3xl md:text-5xl font-bold text-secondary-900 mb-6 leading-tight">
-            Our Doctors
+            Our Expert Medical Specialists
           </h1>
           <p className="text-lg text-secondary-600 max-w-3xl mx-auto leading-relaxed">
             Meet our team of experienced healthcare professionals dedicated to providing you with
