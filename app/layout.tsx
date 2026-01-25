@@ -71,6 +71,11 @@ export const metadata: Metadata = {
   verification: {
     google: 'your-google-verification-code',
   },
+  icons: {
+    icon: '/custom-favicon.ico',
+    shortcut: '/custom-favicon.ico',
+    apple: '/custom-favicon.ico',
+  },
 };
 
 export default function RootLayout({
